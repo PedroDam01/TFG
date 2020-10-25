@@ -33,7 +33,10 @@ public class Login {
    
     public static Usuario extraer(String correo){
         String usu= HttpRequest.GET_REQUEST(Constantes.URL_EXISTE+"?correo="+correo);
-       Gson gson=new Gson();
+       
+        System.out.println("\n\n"+usu+"\n\n");
+
+         Gson gson=new Gson();
          Usuario[] usuario=gson.fromJson(usu,Usuario[].class);
          for (Usuario retorno : usuario) {
              if (retorno.getEmail().equals(correo)) {

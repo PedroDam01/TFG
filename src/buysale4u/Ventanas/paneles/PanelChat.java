@@ -21,7 +21,6 @@ public class PanelChat extends javax.swing.JPanel {
     public PanelChat() {
         initComponents();
         Chat.listar(listaConversaciones);
-        jScrollPane3.add(listaConversaciones);
     }
 
     /**
@@ -80,6 +79,7 @@ public class PanelChat extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        texto.setEditable(false);
         jScrollPane1.setViewportView(texto);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

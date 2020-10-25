@@ -28,6 +28,8 @@ public class Chat {
      */
     public static void listar(JList lista){
         
+        System.out.println("init listar");
+
         Usuario[] usuarios= lista_usuarios();
         
         DefaultListModel<Usuario> modelo=new DefaultListModel<>();
@@ -36,7 +38,9 @@ public class Chat {
         }
        
         lista.setModel(modelo);
-      lista.setCellRenderer(new UsuarioRendererList());
+        lista.setVisible(true);
+        lista.setCellRenderer(new UsuarioRendererList());
+        
         
     }
 /**
