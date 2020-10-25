@@ -8,6 +8,7 @@ package buysale4u.Ventanas.paneles;
 import buysale4u.control.Chat;
 import buysale4u.control.Login;
 import entidades.Conversacion;
+import javax.swing.JFrame;
 
 /**
  *
@@ -68,6 +69,11 @@ public class PanelChat extends javax.swing.JPanel {
         panelLista.add(jScrollPane3, gridBagConstraints);
 
         jButton2.setText("Nuevo Mensaje");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -139,6 +145,19 @@ public class PanelChat extends javax.swing.JPanel {
         }
         texto.setText(cadena);
     }//GEN-LAST:event_listaConversacionesValueChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.out.println("hola");
+        JFrame newframe=new JFrame();
+        NuevoMensaje panel=new NuevoMensaje();
+        panel.setSize(500,500);
+        panel.setVisible(true);
+        newframe.add(panel);
+        newframe.setSize(500,500);
+        newframe.setVisible(true);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
