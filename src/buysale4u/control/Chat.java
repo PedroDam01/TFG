@@ -71,12 +71,13 @@ public class Chat {
     }
 
     /**
-     * Metodo que envia un mensaje a un usuario seleccionado
-     * @param s
-     * @param u 
+     * Metodo que envia un mensaje a un usuario seleccionado 
+     * @param texto
+     * @param asunto
+     * @param mail
      */
-    public static void enviar(String s,Usuario u){
-        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE+"?"+s+"&"+Cliente.u.getEmail()+"&"+u.getEmail());
+    public static void enviar(String texto,String asunto,String mail){
+        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE+"?asunto="+asunto+"&texto="+texto+"&email1="+Cliente.u.getEmail()+"&email2="+mail);
     }
 /**
  * Metodo que elimina la conversacion con otro usuario
