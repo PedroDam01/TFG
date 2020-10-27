@@ -17,11 +17,15 @@ import javax.swing.JFrame;
 public class PanelChat extends javax.swing.JPanel {
 
     /**
+     * 
      * Creates new form PanelChat
      */
     public PanelChat() {
+
         initComponents();
         Chat.listar(listaConversaciones);
+        texto.setEditable(false);
+        
     }
 
     /**
@@ -135,6 +139,7 @@ public class PanelChat extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Chat.enviar(texto.getText(), listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged

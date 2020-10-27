@@ -7,6 +7,7 @@ package buysale4u.Ventanas;
 
 import buysale4u.control.ControlArticulos;
 
+
 /**
  *
  * @author PedroFB
@@ -14,6 +15,7 @@ import buysale4u.control.ControlArticulos;
 public class MostrarArticulo extends javax.swing.JDialog {
 
     /**
+     * 
      * Creates new form MostrarArticulo
      */
     public MostrarArticulo(java.awt.Frame parent, boolean modal) {

@@ -80,8 +80,8 @@ public class Chat {
      * @param asunto
      * @param mail
      */
-    public static void enviar(String texto,String asunto,String mail){
-        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE+"?asunto="+asunto+"&texto="+texto+"&email1="+Cliente.u.getEmail()+"&email2="+mail);
+    public static void enviar(String texto,String mail){
+        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE+"?texto="+texto+"&email1="+Cliente.u.getEmail()+"&email2="+mail);
     }
 /**
  * Metodo que elimina la conversacion con otro usuario
