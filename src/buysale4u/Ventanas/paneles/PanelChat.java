@@ -42,6 +42,7 @@ public class PanelChat extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         listaConversaciones = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        borrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         texto = new javax.swing.JTextPane();
@@ -84,6 +85,12 @@ public class PanelChat extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 0, 53, 0);
         panelLista.add(jButton2, gridBagConstraints);
+
+        borrar.setText("Borrar Conversacion");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        panelLista.add(borrar, gridBagConstraints);
 
         add(panelLista, java.awt.BorderLayout.LINE_START);
 
@@ -166,6 +173,7 @@ public class PanelChat extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton borrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
