@@ -21,6 +21,7 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     public VentanaLogin() {
         initComponents();
+        setSize(536, 410);
 
     }
 

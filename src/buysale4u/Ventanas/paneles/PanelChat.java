@@ -16,8 +16,10 @@ import javax.swing.JFrame;
  */
 public class PanelChat extends javax.swing.JPanel {
 
+    Thread actualizar;
+
     /**
-     * 
+     *
      * Creates new form PanelChat
      */
     public PanelChat() {
@@ -25,7 +27,23 @@ public class PanelChat extends javax.swing.JPanel {
         initComponents();
         Chat.listar(listaConversaciones);
         texto.setEditable(false);
-        
+        actualizar = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+
+                    Chat.listar(listaConversaciones);
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        });
+
+        actualizar.start();
     }
 
     /**
@@ -87,6 +105,11 @@ public class PanelChat extends javax.swing.JPanel {
         panelLista.add(jButton2, gridBagConstraints);
 
         borrar.setText("Borrar Conversacion");
+        borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -147,29 +170,39 @@ public class PanelChat extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Chat.enviar(texto.getText(), listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()));
+        llenarConversacion();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged
-        String cadena=null;
-        Conversacion[] conversacion= Chat.insertarTexto(Login.extraer(listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex())));
+        llenarConversacion();
+    }//GEN-LAST:event_listaConversacionesValueChanged
+    private void llenarConversacion() {
+        String cadena = null;
+        Conversacion[] conversacion = Chat.insertarTexto(Login.extraer(listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex())));
         for (Conversacion c : conversacion) {
-            cadena= cadena+"\n"+c.toString();
+            cadena = cadena + "\n" + c.toString();
         }
         texto.setText(cadena);
-    }//GEN-LAST:event_listaConversacionesValueChanged
-
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        System.out.println("hola");
-        JFrame newframe=new JFrame();
-        NuevoMensaje panel=new NuevoMensaje();
-        panel.setSize(500,500);
+
+        JFrame newframe = new JFrame();
+        NuevoMensaje panel = new NuevoMensaje();
+        panel.setSize(500, 500);
         panel.setVisible(true);
         newframe.add(panel);
-        newframe.setSize(500,500);
+        newframe.setSize(500, 500);
         newframe.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
+        // TODO add your handling code here:
+        Chat.borrar(listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()));
+        Chat.listar(listaConversaciones);
+    }//GEN-LAST:event_borrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,15 +5,11 @@
  */
 package buysale4u.control;
 
-import buysale4u.alertas.AlertError;
-import buysale4u.alertas.AlertSuccess;
 import com.google.gson.Gson;
 import entidades.Usuario;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
-import java.awt.Frame;
 import javax.swing.JOptionPane;
-import org.jdesktop.swingx.JXErrorPane;
 
 
 
@@ -34,8 +30,6 @@ public class Login {
     public static Usuario extraer(String correo){
         String usu= HttpRequest.GET_REQUEST(Constantes.URL_EXISTE+"?correo="+correo);
        
-        System.out.println("\n\n"+usu+"\n\n");
-
          Gson gson=new Gson();
          Usuario[] usuario=gson.fromJson(usu,Usuario[].class);
          for (Usuario retorno : usuario) {
@@ -56,7 +50,7 @@ public class Login {
         if (extraer(usuario.getEmail())==null) {
                   // accedemos al archivo php encargado de insertar un nuevo registro de usuario pasando los datos de dicho usuario en la url
         String respuesta=HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR+"?nombre="+usuario.getNombre()+"&apellidos="+usuario.getApellidos()+"&email="+usuario.getEmail()+"&pass="+usuario.getContraseña());
-            System.out.println(respuesta);
+            
         }else{
             new JOptionPane("el email ya pertenece a un usuario existente").show();
         }
