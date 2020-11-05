@@ -6,7 +6,7 @@
 package buysale4u.Ventanas;
 
 import buysale4u.alertas.AlertError;
-import buysale4u.control.Cliente;
+import buysale4u.control.Login;
 import static buysale4u.control.Login.extraer;
 import entidades.Usuario;
 
@@ -177,7 +177,7 @@ public class VentanaLogin extends javax.swing.JFrame {
             if (usuario.getContraseña().equals(pass.getText())) {
                 new VentanaPrincipal().setVisible(true);
                 this.setVisible(false);
-                Cliente.u=usuario;
+                Login.u=usuario;
             } else {
                 AlertError error = new AlertError(this, rootPaneCheckingEnabled, "contraseña incorrecta");
                 error.setVisible(true);

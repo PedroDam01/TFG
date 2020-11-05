@@ -6,6 +6,16 @@
 package buysale4u.Ventanas;
 
 import buysale4u.control.ControlArticulos;
+import buysale4u.control.ControlGaleria;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+
+
+
 
 
 /**
@@ -21,6 +31,18 @@ public class MostrarArticulo extends javax.swing.JDialog {
     public MostrarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        JList listaFotos=new JList<ImageIcon>();
+        scrollLista.add(listaFotos);
+        ControlGaleria.llenar_galeria(listaFotos);
+        listaFotos.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                imagen.setIcon((Icon) listaFotos.getModel().getElementAt(listaFotos.getSelectedIndex()));
+            }
+        });
+         texto.setEditable(false);
+         texto.setText(ControlArticulos.seleccionado.getDescripcion());
+         
         
     }
 

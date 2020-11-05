@@ -11,7 +11,7 @@ import entidades.Conversacion;
 import javax.swing.JFrame;
 
 /**
- *
+ * 
  * @author PedroFB
  */
 public class PanelChat extends javax.swing.JPanel {
@@ -177,6 +177,9 @@ public class PanelChat extends javax.swing.JPanel {
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged
         llenarConversacion();
     }//GEN-LAST:event_listaConversacionesValueChanged
+   /**
+    * 
+    */
     private void llenarConversacion() {
         String cadena = null;
         Conversacion[] conversacion = Chat.insertarTexto(Login.extraer(listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex())));

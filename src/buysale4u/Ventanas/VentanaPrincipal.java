@@ -5,7 +5,9 @@
  */
 package buysale4u.Ventanas;
 
+import buysale4u.Ventanas.paneles.Articulos;
 import buysale4u.Ventanas.paneles.PanelChat;
+import java.awt.Frame;
 import javax.swing.JFrame;
 
 /**
@@ -47,6 +49,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton4.setText("Articulos");
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton4);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/chat.png"))); // NOI18N
@@ -79,6 +86,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             chatFrame.setVisible(true);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        Frame articulos=new Frame();
+        articulos.add(new Articulos());
+        articulos.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,7 +31,7 @@ public class Chat {
      */
     public static void listar(JList lista) {
 
-        System.out.println("init listar");
+       
 
         Usuario[] usuarios = lista_usuarios();
 
@@ -53,7 +53,7 @@ public class Chat {
      */
     public static Usuario[] lista_usuarios() {
 
-        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_CHAT + "?correo=" + Cliente.u.getEmail());
+        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_CHAT + "?correo=" + Login.u.getEmail());
 
         Gson gson = new Gson();
         Usuario[] array = gson.fromJson(cadena, Usuario[].class);
@@ -71,7 +71,7 @@ public class Chat {
      */
     public static Conversacion[] insertarTexto(Usuario u) {
 
-        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?correo_cliente=" + Cliente.u.getEmail() + "&correo_destinatario" + u.getEmail());
+        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?correo_cliente=" + Login.u.getEmail() + "&correo_destinatario" + u.getEmail());
         Gson gson = new Gson();
         Conversacion[] array = gson.fromJson(cadena, Conversacion[].class);
         return array;
@@ -84,7 +84,7 @@ public class Chat {
      * @param mail
      */
     public static void enviar(String texto, String mail) {
-        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE + "?texto=" + texto + "&email1=" + Cliente.u.getEmail() + "&email2=" + mail);
+        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE + "?texto=" + texto + "&email1=" + Login.u.getEmail() + "&email2=" + mail);
     }
 
     /**
@@ -93,6 +93,6 @@ public class Chat {
      * @param email
      */
     public static void borrar(String email) {
-        HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_CONVERSACION + "?email1=" + Cliente.u.getEmail() + "&email2=" + email);
+        HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + email);
     }
 }

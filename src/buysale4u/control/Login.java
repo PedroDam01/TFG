@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  * @author PedroFB
  */
 public class Login {
+     public static Usuario u=null;
     /**
      * Metodo para comprobar si existe o no un usuario en la base de datos
      * 
