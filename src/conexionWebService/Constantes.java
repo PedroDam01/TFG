@@ -24,13 +24,15 @@ public class Constantes {
     public static final String URL_ENVIAR_MENSAJE = URL_SERVIDOR + "enviar_mensaje.php";
 
     public static final String URL_BORRAR_CONVERSACION = URL_SERVIDOR + "borrar_conversacion.php";
-   
+
     public static final String URL_LISTA_ARTICULOS = URL_SERVIDOR + "lista_articulos.php";
-    
+
     public static final String URL_LISTA_IMAGENES = URL_SERVIDOR + "lista_imagenes.php";
-   
+
     public static final String URL_INSERTAR_IMAGEN = URL_SERVIDOR + "insertar_imagen.php";
-   
+
     public static final String URL_BORRAR_IMAGEN = URL_SERVIDOR + "borrar_imagen.php";
+
+    public static String URL_ACTUALIZAR_USUARIO;
 
 }
