@@ -71,7 +71,7 @@ public class Chat {
      */
     public static Conversacion[] insertarTexto(Usuario u) {
 
-        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?correo_cliente=" + Login.u.getEmail() + "&correo_destinatario" + u.getEmail());
+        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + u.getEmail());
         Gson gson = new Gson();
         Conversacion[] array = gson.fromJson(cadena, Conversacion[].class);
         return array;

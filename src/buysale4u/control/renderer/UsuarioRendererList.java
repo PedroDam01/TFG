@@ -20,7 +20,7 @@ import javax.swing.ListCellRenderer;
 public class UsuarioRendererList extends JLabel implements ListCellRenderer<Usuario>{
 
     public UsuarioRendererList(){
-        setOpaque(true);
+        setOpaque(false);
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends Usuario> list, Usuario value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -28,5 +28,7 @@ public class UsuarioRendererList extends JLabel implements ListCellRenderer<Usua
         setText(texto);
         return this;
     }
+
+    
     
 }

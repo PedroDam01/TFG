@@ -13,8 +13,8 @@ public class Conversacion {
     
     String mail,fechaHora,texto;
 
-    public Conversacion(String mail, String fechaHora, String texto) {
-        this.mail = mail;
+    public Conversacion(String texto, String fechaHora) {
+     
         this.fechaHora = fechaHora;
         this.texto = texto;
     }
