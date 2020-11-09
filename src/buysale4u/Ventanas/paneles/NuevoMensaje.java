@@ -90,6 +90,7 @@ public class NuevoMensaje extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         Chat.enviar(texto.getText(),email.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 

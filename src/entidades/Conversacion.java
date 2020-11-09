@@ -33,7 +33,7 @@ public class Conversacion {
 
     @Override
     public String toString() {
-        return   "{"+fechaHora +"} " +mail  + ": " + texto + '}';
+        return   "{"+fechaHora +"} : " + texto + '}';
     }
     
 }

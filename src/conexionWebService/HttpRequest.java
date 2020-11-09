@@ -71,7 +71,9 @@ public final class HttpRequest {
         try {
             StringBuilder result = new StringBuilder();
             String URL = url ;
+            
             URL obj = new URL(URL);
+            
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
            
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

@@ -11,6 +11,7 @@ import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 import entidades.Conversacion;
 import entidades.Usuario;
+import java.net.URLEncoder;
 import javax.swing.DefaultListModel;
 
 import javax.swing.JList;
@@ -73,7 +74,9 @@ public class Chat {
 
         String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + u.getEmail());
         Gson gson = new Gson();
+        System.out.println(cadena);
         Conversacion[] array = gson.fromJson(cadena, Conversacion[].class);
+        
         return array;
     }
 
@@ -84,7 +87,9 @@ public class Chat {
      * @param mail
      */
     public static void enviar(String texto, String mail) {
-        HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE + "?texto=" + texto + "&email1=" + Login.u.getEmail() + "&email2=" + mail);
+       String encode= URLEncoder.encode(texto);
+        String respuesta=HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE + "?texto=" + encode + "&email1=" + Login.u.getEmail() + "&email2=" + mail);
+        System.out.println(respuesta);
     }
 
     /**

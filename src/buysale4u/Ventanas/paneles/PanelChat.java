@@ -189,7 +189,7 @@ public class PanelChat extends javax.swing.JPanel {
         int currentSelected = listaConversaciones.getSelectedIndex();
         if (currentSelected!=-1) {
            Usuario currentUser = (Usuario) lista.getElementAt(currentSelected);
-        System.out.println("\n\n" + currentUser.toString() + "\n\n");
+       
         Conversacion[] conversacion = Chat.insertarTexto(currentUser);
         for (Conversacion c : conversacion) {
             cadena = cadena + "\n" + c.toString();
