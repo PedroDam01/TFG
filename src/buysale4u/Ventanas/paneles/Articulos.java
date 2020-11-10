@@ -34,7 +34,7 @@ public class Articulos extends javax.swing.JPanel {
         DefaultListModel modelo=null;
        // ControlArticulos.listar(listaArticulos);
         if (modelo==null) {
-            JOptionPane.showConfirmDialog(parent, "actualmente no se encuentran anuncios de articulos");
+            JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
         }
       /**
         listaArticulos.addListSelectionListener(new ListSelectionListener() {

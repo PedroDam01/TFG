@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -105,10 +107,15 @@ public class ControlArticulos {
     public static void insertar(ArrayList<byte[]> galeria, String titulo, String descripcion,int provincia) {
        String tituloEncode=URLEncoder.encode( titulo);
        String descripcionEncode=URLEncoder.encode(descripcion);
-        String c=HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+tituloEncode+"&descripcion="+descripcionEncode+"&provincia="+provincia+"&correo="+Login.u.getEmail());
-        System.out.println(c);
+        HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+tituloEncode+"&descripcion="+descripcionEncode+"&provincia="+provincia+"&correo="+Login.u.getEmail());
+       
         galeria.forEach((bs) -> {
-            HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_IMAGEN+"?binario="+bs.toString()+"&correo="+Login.u.getEmail());
+             String s = Base64.getEncoder().encodeToString(bs);
+             String encode=URLEncoder.encode(s);
+             URL url=new URL(Constantes.URL_INSERTAR_IMAGEN+"?binario="+encode+"&correo="+Login.u.getEmail());
+             
+            String c=HttpRequest.GET_REQUEST();
+            System.out.println(c);
         });
     }
 }
