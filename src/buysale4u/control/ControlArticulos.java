@@ -107,4 +107,12 @@ public class ControlArticulos {
         String byteArrayToString = new String(imagenBinario);
             HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_IMAGEN + "?bytes=" + byteArrayToString);
     }
+
+    public static void insertar(ArrayList<byte[]> galeria, String titulo, String descripcion,int provincia) {
+       
+        HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+titulo+"&descripcion="+descripcion+"&provincia="+provincia+"&usuario="+Login.u.getEmail());
+        galeria.forEach((bs) -> {
+            HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_IMAGEN+"?binario="+bs.toString());
+        });
+    }
 }
