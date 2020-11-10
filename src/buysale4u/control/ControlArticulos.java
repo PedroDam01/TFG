@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,20 +100,15 @@ public class ControlArticulos {
         }
     }
 
-    /**
-     * 
-     * @param imagenBinario 
-     */
-    public static void borrarImagen(byte[]imagenBinario){
-        String byteArrayToString = new String(imagenBinario);
-            HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_IMAGEN + "?bytes=" + byteArrayToString);
-    }
+   
 
     public static void insertar(ArrayList<byte[]> galeria, String titulo, String descripcion,int provincia) {
-       
-        HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+titulo+"&descripcion="+descripcion+"&provincia="+provincia+"&usuario="+Login.u.getEmail());
+       String tituloEncode=URLEncoder.encode( titulo);
+       String descripcionEncode=URLEncoder.encode(descripcion);
+        String c=HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+tituloEncode+"&descripcion="+descripcionEncode+"&provincia="+provincia+"&correo="+Login.u.getEmail());
+        System.out.println(c);
         galeria.forEach((bs) -> {
-            HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_IMAGEN+"?binario="+bs.toString());
+            HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_IMAGEN+"?binario="+bs.toString()+"&correo="+Login.u.getEmail());
         });
     }
 }

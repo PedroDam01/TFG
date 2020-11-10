@@ -9,6 +9,7 @@ import buysale4u.Ventanas.paneles.Articulos;
 import buysale4u.Ventanas.paneles.PanelChat;
 import java.awt.Frame;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,11 +17,13 @@ import javax.swing.JFrame;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+  
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+   
     }
 
     /**
@@ -89,9 +92,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Frame articulos=new Frame();
-        articulos.add(new Articulos());
-        articulos.setVisible(true);
+        if (articulos==null) {
+            articulos=new JFrame();
+         articulos.add(new Articulos(articulos));
+         articulos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+         articulos.setSize(500,500); 
+        }
+        
+         if (!articulos.isVisible()) {
+            articulos.setVisible(true);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -136,4 +146,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
     JFrame chatFrame=null;
+    JFrame articulos=null;
 }

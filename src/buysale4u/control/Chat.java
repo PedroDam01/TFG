@@ -74,7 +74,7 @@ public class Chat {
 
         String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + u.getEmail());
         Gson gson = new Gson();
-        System.out.println(cadena);
+        
         Conversacion[] array = gson.fromJson(cadena, Conversacion[].class);
         
         return array;

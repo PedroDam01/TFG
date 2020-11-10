@@ -5,13 +5,13 @@
  */
 package buysale4u.Ventanas;
 
-import buysale4u.alertas.AlertError;
+
 import buysale4u.control.ControlArticulos;
 import com.google.gson.Gson;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 import entidades.Provincia;
-import java.awt.Frame;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -28,7 +28,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.jdesktop.swingx.JXComboBox;
+
 
 /**
  *
@@ -36,7 +36,7 @@ import org.jdesktop.swingx.JXComboBox;
  */
 public class NuevoArticulo extends javax.swing.JDialog {
 
-    Frame parent;
+
     ArrayList<byte[]> galeria;
             JList<String> lista;
             ArrayList<String> elementos;
@@ -46,16 +46,19 @@ public class NuevoArticulo extends javax.swing.JDialog {
      */
     public NuevoArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.parent=parent;
+      
         initComponents();
         lista=new JList();
         scroll.add(lista);
-        
+        modeloProvincias(provincia);
+        galeria=new ArrayList<>();
+        elementos=new ArrayList<>();
     }
 
     private void modeloProvincias(JComboBox jcb){
         DefaultComboBoxModel modelo=new DefaultComboBoxModel();
         String json=HttpRequest.GET_REQUEST(Constantes.URL_LISTA_PROVINCIAS);
+       
         Gson gson=new Gson();
        listaProvincias = gson.fromJson(json, Provincia[].class);
         for (Provincia listaProvincia : listaProvincias) {
@@ -214,7 +217,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-         Scanner entrada = null;
+        
         JFileChooser fc = new JFileChooser();
         //Se crea el filtro. El primer parámetro es el mensaje que se muestra,
         //el segundo es la extensión de los ficheros que se van a mostrar      
@@ -222,24 +225,23 @@ public class NuevoArticulo extends javax.swing.JDialog {
         //Se le asigna al JFileChooser el filtro
         fc.setFileFilter(filtro);
        int valor= fc.showOpenDialog(fc);
+       
         if (valor==JFileChooser.APPROVE_OPTION) {
-            String ruta = fc.getSelectedFile().getAbsolutePath();
+                  
+
+            
             try {
-            File f = new File(ruta);
+            File f = fc.getSelectedFile();
+                   
+
             byte[] bytes= extractBytes(f);
             galeria.add(bytes);
             actualizarLista(f);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("No se ha seleccionado ningún fichero");
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            if (entrada != null) {
-                entrada.close();
-            }
-        }
+        } catch (NullPointerException | IOException e) {
+            e.printStackTrace();
+        } 
         }
         
     
@@ -249,11 +251,10 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (titulo.getText().isEmpty()) {
-            AlertError alerta=new AlertError(parent, rootPaneCheckingEnabled, "no se puede dejar vacio el titulo");
-            alerta.setVisible(true);
+          
+           
         }else if(provincia.getSelectedItem()==null){
-          AlertError alerta=new AlertError(parent, rootPaneCheckingEnabled, "seleccione una provincia");
-            alerta.setVisible(true);
+        
         }else{
            ControlArticulos.insertar(galeria, titulo.getText(), descripcion.getText(), listaProvincias[provincia.getSelectedIndex()].getId());
         }
@@ -332,7 +333,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private void actualizarLista(File f) {
         
         DefaultListModel modelo=new DefaultListModel();
-        elementos.add(f.getName());
+        elementos.add(f.getAbsolutePath());
         elementos.forEach((cadena) -> {
             modelo.addElement(cadena);
         });

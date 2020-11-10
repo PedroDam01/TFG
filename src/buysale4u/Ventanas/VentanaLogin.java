@@ -5,7 +5,7 @@
  */
 package buysale4u.Ventanas;
 
-import buysale4u.alertas.AlertError;
+
 import buysale4u.control.Login;
 import static buysale4u.control.Login.extraer;
 import entidades.Usuario;
@@ -171,16 +171,14 @@ public class VentanaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         Usuario usuario = extraer(email.getText());
         if (usuario == null) {
-            AlertError error = new AlertError(this, rootPaneCheckingEnabled, "usuario no encontrado");
-            error.setVisible(true);
+           
         } else {
             if (usuario.getContraseña().equals(pass.getText())) {
                 new VentanaPrincipal().setVisible(true);
                 this.setVisible(false);
                 Login.u=usuario;
             } else {
-                AlertError error = new AlertError(this, rootPaneCheckingEnabled, "contraseña incorrecta");
-                error.setVisible(true);
+               
             }
         }
 

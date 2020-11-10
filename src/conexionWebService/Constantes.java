@@ -34,7 +34,7 @@ public class Constantes {
     public static final String URL_BORRAR_IMAGEN = URL_SERVIDOR + "borrar_imagen.php";
 
     public static String URL_ACTUALIZAR_USUARIO;
-    public static String URL_INSERTAR_ARTICULO;
-    public static String URL_LISTA_PROVINCIAS;
+    public static String URL_INSERTAR_ARTICULO=URL_SERVIDOR+"nuevo_articulo.php";
+    public static String URL_LISTA_PROVINCIAS=URL_SERVIDOR+ "lista_provincias.php";
 
 }

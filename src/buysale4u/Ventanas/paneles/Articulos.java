@@ -6,13 +6,15 @@
 package buysale4u.Ventanas.paneles;
 
 import buysale4u.Ventanas.MostrarArticulo;
+import buysale4u.Ventanas.NuevoArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
 import java.awt.Dialog;
 import java.awt.Frame;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -20,16 +22,21 @@ import javax.swing.event.ListSelectionListener;
  */
 public class Articulos extends javax.swing.JPanel {
 
+    Frame parent;
     JList<Articulo>listaArticulos;
     Dialog galeria;
     /**
      * Creates new form Articulos
      */
-    public Articulos() {
+    public Articulos(Frame parent) {
         initComponents();
-        
-        ControlArticulos.listar(listaArticulos);
-      
+        this.parent=parent;
+        DefaultListModel modelo=null;
+       // ControlArticulos.listar(listaArticulos);
+        if (modelo==null) {
+            JOptionPane.showConfirmDialog(parent, "actualmente no se encuentran anuncios de articulos");
+        }
+      /**
         listaArticulos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -40,6 +47,7 @@ public class Articulos extends javax.swing.JPanel {
                 
             }
         });
+        * */
     }
    
     /**
@@ -52,13 +60,29 @@ public class Articulos extends javax.swing.JPanel {
     private void initComponents() {
 
         scrollLista = new javax.swing.JScrollPane();
+        jButton1 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridBagLayout());
         add(scrollLista, new java.awt.GridBagConstraints());
+
+        jButton1.setText("Articulo Nuevo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new java.awt.GridBagConstraints());
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Dialog nuevo=new  NuevoArticulo(parent, true);
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane scrollLista;
     // End of variables declaration//GEN-END:variables
 }
