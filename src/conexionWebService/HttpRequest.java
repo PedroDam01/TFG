@@ -90,36 +90,6 @@ public final class HttpRequest {
             return e.toString();
         }
     }
-    /**
-     * ejecucion de consultas que devuelbe valor binario
-     * @param url
-     * @return 
-     */
-     public static ArrayList<byte[]> GET_REQUEST_BINARY(String url) {
-       
-        try {
-            ArrayList<byte[]> result=new ArrayList<byte[]>();
-            String URL = url ;
-            URL obj = new URL(URL);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                byte[] binario = inputLine.getBytes();
-                result.add(binario);
-                
-            }
-            return result;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(HttpRequest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(HttpRequest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-
-        
-        
-    }
+    
    
 }

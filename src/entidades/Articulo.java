@@ -17,18 +17,26 @@ import javax.swing.ImageIcon;
  */
 public class Articulo {
     ImageIcon[]imagenes;
-    String titulo, descripcion;
-    double precio;
+    String titulo, descripcion,provincia;
+  
     int id;
-    Usuario vendedor;
+    int vendedor;
 
-    public Articulo(int id,String titulo, String descripcion, double precio, Usuario vendedor) {
+    public Articulo(int id,String titulo, String descripcion,String provincia, int vendedor) {
        
         this.id=id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.precio = precio;
+        this.provincia=provincia;
         this.vendedor = vendedor;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getProvincia() {
+        return provincia;
     }
 
     public void setImagenes(ImageIcon[] imagenes) {
@@ -43,15 +51,12 @@ public class Articulo {
         this.descripcion = descripcion;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
+    
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setVendedor(Usuario vendedor) {
+    public void setVendedor(int vendedor) {
         this.vendedor = vendedor;
     }
 
@@ -71,11 +76,7 @@ public class Articulo {
         return descripcion;
     }
 
-    public double getPrecio() {
-        return precio;
-    }
-
-    public Usuario getVendedor() {
+    public int getVendedor() {
         return vendedor;
     }
     

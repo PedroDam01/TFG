@@ -14,6 +14,8 @@ import java.awt.Frame;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 /**
@@ -32,11 +34,17 @@ public class Articulos extends javax.swing.JPanel {
         initComponents();
         this.parent=parent;
         DefaultListModel modelo=null;
-       // ControlArticulos.listar(listaArticulos);
+       try{
+           Articulo[]array=ControlArticulos.listar();
+       
+        ControlArticulos.completarArticulo(listaArticulos, array);
+       }catch(Exception e){
+           e.printStackTrace();
+       }
         if (modelo==null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
         }
-      /**
+      
         listaArticulos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -46,8 +54,10 @@ public class Articulos extends javax.swing.JPanel {
                 galeria.setVisible(true);
                 
             }
+
+            
         });
-        * */
+        
     }
    
     /**
