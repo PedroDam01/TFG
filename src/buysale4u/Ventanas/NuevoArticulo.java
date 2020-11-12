@@ -5,7 +5,6 @@
  */
 package buysale4u.Ventanas;
 
-
 import buysale4u.control.ControlArticulos;
 import com.google.gson.Gson;
 import conexionWebService.Constantes;
@@ -25,10 +24,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 /**
  *
@@ -36,37 +34,37 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class NuevoArticulo extends javax.swing.JDialog {
 
-
     ArrayList<byte[]> galeria;
-            JList<String> lista;
-            ArrayList<String> elementos;
-            Provincia[] listaProvincias;
+    
+    ArrayList<String> elementos;
+    Provincia[] listaProvincias;
+
     /**
      * Creates new form NuevoArticulo
      */
     public NuevoArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-      
+
         initComponents();
-        lista=new JList();
-        scroll.add(lista);
+        
+       
         modeloProvincias(provincia);
-        galeria=new ArrayList<>();
-        elementos=new ArrayList<>();
+        galeria = new ArrayList<>();
+        elementos = new ArrayList<>();
     }
 
-    private void modeloProvincias(JComboBox jcb){
-        DefaultComboBoxModel modelo=new DefaultComboBoxModel();
-        String json=HttpRequest.GET_REQUEST(Constantes.URL_LISTA_PROVINCIAS);
-       
-        Gson gson=new Gson();
-       listaProvincias = gson.fromJson(json, Provincia[].class);
+    private void modeloProvincias(JComboBox jcb) {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        String json = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_PROVINCIAS);
+
+        Gson gson = new Gson();
+        listaProvincias = gson.fromJson(json, Provincia[].class);
         for (Provincia listaProvincia : listaProvincias) {
             modelo.addElement(listaProvincia.getNombre());
         }
         jcb.setModel(modelo);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,6 +77,7 @@ public class NuevoArticulo extends javax.swing.JDialog {
         fileChooser = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
+        list = new javax.swing.JList<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         titulo = new javax.swing.JTextField();
@@ -98,6 +97,8 @@ public class NuevoArticulo extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        scroll.setViewportView(list);
 
         javax.swing.GroupLayout fileChooserLayout = new javax.swing.GroupLayout(fileChooser);
         fileChooser.setLayout(fileChooserLayout);
@@ -216,62 +217,56 @@ public class NuevoArticulo extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        
+
         JFileChooser fc = new JFileChooser();
         //Se crea el filtro. El primer parámetro es el mensaje que se muestra,
         //el segundo es la extensión de los ficheros que se van a mostrar      
-        FileFilter filtro = new FileNameExtensionFilter("Imagen (.jpg)", "jpg"); 
+        FileFilter filtro = new FileNameExtensionFilter("Imagen (.jpg)", "jpg");
         //Se le asigna al JFileChooser el filtro
         fc.setFileFilter(filtro);
-       int valor= fc.showOpenDialog(fc);
-       
-        if (valor==JFileChooser.APPROVE_OPTION) {
-                  
+        int valor = fc.showOpenDialog(fc);
 
-            
+        if (valor == JFileChooser.APPROVE_OPTION) {
+
             try {
-            File f = fc.getSelectedFile();
-                   
+                File f = fc.getSelectedFile();
 
-            byte[] bytes= extractBytes(f);
-            galeria.add(bytes);
-            actualizarLista(f);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        } catch (NullPointerException | IOException e) {
-            e.printStackTrace();
-        } 
+                byte[] bytes = extractBytes(f);
+                galeria.add(bytes);
+                actualizarLista(f);
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch (NullPointerException | IOException e) {
+                e.printStackTrace();
+            }
         }
-        
-    
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         if (titulo.getText().isEmpty()) {
-          
-           
-        }else if(provincia.getSelectedItem()==null){
-        
-        }else{
-           ControlArticulos.insertar(galeria, titulo.getText(), descripcion.getText(), listaProvincias[provincia.getSelectedIndex()].getId());
+            JOptionPane.showMessageDialog(rootPane, "no has añadido titulo");
+        } else if (provincia.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(rootPane, "selecciona una provincia");
+        } else {
+            ControlArticulos.insertar(galeria, titulo.getText(), descripcion.getText(), listaProvincias[provincia.getSelectedIndex()].getId());
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public byte[] extractBytes (File imgPath) throws IOException {
-    
+    public byte[] extractBytes(File imgPath) throws IOException {
+
         BufferedImage bufferedImage = ImageIO.read(imgPath);
 
-    // get DataBufferBytes from Raster
-    WritableRaster raster = bufferedImage .getRaster();
-    DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
+        // get DataBufferBytes from Raster
+        WritableRaster raster = bufferedImage.getRaster();
+        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
 
-    return ( data.getData() );
-}
-    
+        return (data.getData());
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -325,18 +320,21 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list;
     private javax.swing.JComboBox<String> provincia;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 
     private void actualizarLista(File f) {
+
+        DefaultListModel<String> modelo = new DefaultListModel();
+        elementos.add(f.getName());
+        for (String elemento : elementos) {
+            modelo.addElement(elemento);
+        }
+            
         
-        DefaultListModel modelo=new DefaultListModel();
-        elementos.add(f.getAbsolutePath());
-        elementos.forEach((cadena) -> {
-            modelo.addElement(cadena);
-        });
-        lista.setModel(modelo);
+        list.setModel(modelo);
     }
 }

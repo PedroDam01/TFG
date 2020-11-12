@@ -107,15 +107,29 @@ public class ControlArticulos {
     public static void insertar(ArrayList<byte[]> galeria, String titulo, String descripcion,int provincia) {
        String tituloEncode=URLEncoder.encode( titulo);
        String descripcionEncode=URLEncoder.encode(descripcion);
-        HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+tituloEncode+"&descripcion="+descripcionEncode+"&provincia="+provincia+"&correo="+Login.u.getEmail());
-       
-        galeria.forEach((bs) -> {
+      String id =  HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO+"?titulo="+tituloEncode+"&descripcion="+descripcionEncode+"&provincia="+provincia+"&correo="+Login.u.getEmail());
+     
+        for (byte[] bs : galeria) {
+            
              String s = Base64.getEncoder().encodeToString(bs);
-             String encode=URLEncoder.encode(s);
-             URL url=new URL(Constantes.URL_INSERTAR_IMAGEN+"?binario="+encode+"&correo="+Login.u.getEmail());
-             
-            String c=HttpRequest.GET_REQUEST();
-            System.out.println(c);
-        });
+             String json=  "{\"id\":"+id+", \"imgByte\":\""+ s +"\"}";
+           HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_IMAGEN, json);
+            }
+            
+           
+        
     }
+    
+    public static ImageIcon bytetoImg(byte[]bytes){
+        try {
+            InputStream in = new ByteArrayInputStream(bytes);
+            BufferedImage image = ImageIO.read(in);
+            ImageIcon img= new ImageIcon(image);
+            return img;
+        } catch (IOException ex) {
+            Logger.getLogger(ControlArticulos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }   
+
 }

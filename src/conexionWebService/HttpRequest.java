@@ -16,8 +16,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
 
 /**
  * Clase HttpRequest: permite enviar (INSERT,DELETE,UPDATE) y recibir (SELECT) datos del WebService
@@ -36,10 +35,12 @@ public final class HttpRequest {
 	 * @return
 	 */
     public static String POST_REQUEST(String url, String values) {
-        try {
+         try {
             StringBuilder result = new StringBuilder();
             URL url2 = new URL(url);
-            URLConnection conn = url2.openConnection();
+            HttpURLConnection conn =  (HttpURLConnection) url2.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
             conn.setDoOutput(true);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(values);
