@@ -5,11 +5,12 @@
  */
 package buysale4u.control.renderer;
 
-import entidades.Articulo;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import entidades.ArticuloFinal;
 
 import java.awt.Component;
-
 import javax.swing.ImageIcon;
+
 
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,21 +20,26 @@ import javax.swing.ListCellRenderer;
  *
  * @author PedroFB
  */
-public class ArticuloRendererList extends JLabel implements ListCellRenderer<Articulo>{
+public class ArticuloRendererList extends JLabel implements ListCellRenderer<ArticuloFinal>{
 
 
     public ArticuloRendererList() {
         setOpaque(true);
     }
 
+  
+
     @Override
-    public Component getListCellRendererComponent(JList<? extends Articulo> list, Articulo value, int index, boolean isSelected, boolean cellHasFocus) {
-        String texto= value.getTitulo();
-        setText(texto);
-        ImageIcon[]icono=value.getImagenes();
-        setIcon(icono[0]);
-        
-                return this;
+    public Component getListCellRendererComponent(JList<? extends ArticuloFinal> list, ArticuloFinal value, int index, boolean isSelected, boolean cellHasFocus) {
+        setText(value.getIdArticulo().getTitulo());
+        if (value.getImagenes()!=null) {
+            byte[] array= Base64.decode(value.getImagenes().get(0).getBinario());
+            ImageIcon img=new ImageIcon(array);
+            setIcon( img);
+        }
+       
+       
+        return this;
     }
     
 }

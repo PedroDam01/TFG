@@ -5,7 +5,10 @@
  */
 package entidades;
 
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 
 
@@ -15,12 +18,12 @@ import javax.swing.ImageIcon;
  *
  * @author PedroFB
  */
-public class Articulo {
-    ImageIcon[]imagenes;
+public class Articulo  {
     String titulo, descripcion,provincia;
   
     int id;
     int vendedor;
+    
 
     public Articulo(int id,String titulo, String descripcion,String provincia, int vendedor) {
        
@@ -31,6 +34,7 @@ public class Articulo {
         this.vendedor = vendedor;
     }
 
+   
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
@@ -39,9 +43,6 @@ public class Articulo {
         return provincia;
     }
 
-    public void setImagenes(ImageIcon[] imagenes) {
-        this.imagenes = imagenes;
-    }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -64,9 +65,12 @@ public class Articulo {
         return id;
     }
 
-    public ImageIcon[] getImagenes() {
-        return imagenes;
+    @Override
+    public String toString() {
+        return "Articulo{" + "titulo=" + titulo + ", descripcion=" + descripcion + ", provincia=" + provincia + ", id=" + id + ", vendedor=" + vendedor + '}';
     }
+
+   
 
     public String getTitulo() {
         return titulo;

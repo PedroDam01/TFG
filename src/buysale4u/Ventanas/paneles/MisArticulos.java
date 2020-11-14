@@ -8,9 +8,10 @@ package buysale4u.Ventanas.paneles;
 import buysale4u.Ventanas.MostrarArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
-import entidades.ArticuloFinal;
 import java.awt.Dialog;
 import java.awt.Frame;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -19,33 +20,34 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author PedroFB
  */
-public class Articulos extends javax.swing.JPanel {
-
-    
+public class MisArticulos extends javax.swing.JPanel {
+ JList<Articulo> listaArticulos;
     Dialog galeria;
 
     /**
      * Creates new form Articulos
      */
-    public Articulos(Frame parent) {
+    public MisArticulos(Frame parent) {
         initComponents();
-        
+
+        DefaultListModel modelo = null;
+        listaArticulos = new JList<>();
         try {
             Articulo[] array = ControlArticulos.listar();
 
-            ControlArticulos.completarArticulo(lista, array);
+            ControlArticulos.completarArticulo(listaArticulos, array);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (lista.getModel()== null) {
+        if (modelo == null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
         }
 
-        lista.addListSelectionListener(new ListSelectionListener() {
+        listaArticulos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int indice = lista.getSelectedIndex();
-                ControlArticulos.seleccionado = (Articulo) lista.getModel().getElementAt(indice).getIdArticulo();
+                int indice = listaArticulos.getSelectedIndex();
+                ControlArticulos.seleccionado = listaArticulos.getModel().getElementAt(indice);
                 galeria = new MostrarArticulo((Frame) getParent(), true);
                 galeria.setVisible(true);
 
@@ -54,7 +56,6 @@ public class Articulos extends javax.swing.JPanel {
         });
 
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,19 +66,13 @@ public class Articulos extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lista = new javax.swing.JList<>();
 
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
-
-        lista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(lista);
-
-        add(jScrollPane1);
+        setLayout(new java.awt.BorderLayout());
+        add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<ArticuloFinal> lista;
     // End of variables declaration//GEN-END:variables
 }

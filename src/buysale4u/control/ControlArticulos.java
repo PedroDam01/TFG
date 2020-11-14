@@ -14,6 +14,7 @@ import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 import entidades.Articulo;
 import entidades.Binario;
+import entidades.ArticuloFinal;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -22,7 +23,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -40,66 +40,63 @@ import javax.swing.JList;
 public class ControlArticulos {
 
     public static Articulo seleccionado;
+    public static ArrayList<ArticuloFinal> listadoArticuloFinal;
 
     /**
      *
-     * 
+     *
+     * @return
      */
     public static Articulo[] listar() {
-        String cadena = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_ARTICULOS);
-        Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-    @Override
-    public boolean shouldSkipField(FieldAttributes f) {
-        return f.getDeclaringClass().equals(Articulo.class);
+        String json = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_ARTICULOS);
+
+        Gson gson = new Gson();
+
+        Articulo[] articulos = gson.fromJson(json, Articulo[].class);
+        return articulos;
+
     }
 
-    @Override
-    public boolean shouldSkipClass(Class<?> clazz) {
-        return false;
-    }
-        }).create();
-        Articulo[] array = gson.fromJson(cadena, Articulo[].class);
-       
-      return array;
-    }
     /**
-     * 
+     *
      * @param lista
-     * @param array 
+     * @param array
      */
-public static void completarArticulo(JList lista,Articulo[]array){
-    System.out.println(array.length);
-             Gson gson = new GsonBuilder().setExclusionStrategies(new ExclusionStrategy() {
-    @Override
-    public boolean shouldSkipField(FieldAttributes f) {
-        return f.getDeclaringClass().equals(Binario.class);
-    }
+    public static void completarArticulo(JList lista, Articulo[] array) {
+        listadoArticuloFinal = new ArrayList<>();
 
-    @Override
-    public boolean shouldSkipClass(Class<?> clazz) {
-        return false;
-    }
-        }).create();
-
-      for (int i = 0; i < array.length; i++) {
-            ImageIcon[] imagenes = null;
-            String cadenabinario = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_IMAGENES + "?id_articulo=" + array[i].getId());
+        Gson gson = new Gson();
+        for (Articulo array1 : array) {
+            ArrayList<Binario> imagenes = null;
+            String cadenabinario = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_IMAGENES + "?id_articulo=" + array1.getId());
+            System.out.println("Linea 1 -- "+cadenabinario);
             Binario[] binario = gson.fromJson(cadenabinario, Binario[].class);
-            for (int x = 0; x < binario.length; x++) {
-                if (binario[x]!=null) {
-                    imagenes[x] = new ImageIcon(binario[x].getBinario());
+            for (Binario binario1 : binario) {
+                System.out.println("Linea 2 -- " + binario1.getBinario());
+                System.out.println("Linea 3 -- " + binario1.getIdArticulo());
+                System.err.println(array1.getId());
+                if (binario1.getIdArticulo() == array1.getId()) {
+                    imagenes.add(binario1);
                 }
-                
             }
-
-            array[i].setImagenes(imagenes);
+            ArticuloFinal galeria = new ArticuloFinal(array1, imagenes);
+            listadoArticuloFinal.add(galeria);
         }
-        DefaultListModel<Articulo> modelo = new DefaultListModel<>();
+      
+        DefaultListModel<ArticuloFinal> modelo = new DefaultListModel<>();
+        for (ArticuloFinal af:listadoArticuloFinal) {
+            modelo.addElement(af);
+            
+            
+           
+        }
+        
 
         lista.setModel(modelo);
         lista.setCellRenderer(new ArticuloRendererList());
-    
-}
+      
+    }
+
     /**
      *
      * @param img
