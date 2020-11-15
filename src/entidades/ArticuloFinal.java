@@ -6,6 +6,7 @@
 package entidades;
 
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ArticuloFinal {
 
     Articulo articulo;
-    Binario[] imagenes;
+    ArrayList<ImageIcon> imagenes;
 
     public Articulo getIdArticulo() {
         return articulo;
@@ -24,15 +25,15 @@ public class ArticuloFinal {
         this.articulo = idArticulo;
     }
 
-    public  Binario[] getImagenes() {
+    public  ArrayList<ImageIcon> getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes( Binario[] imagenes) {
+    public void setImagenes( ArrayList<ImageIcon> imagenes) {
         this.imagenes = imagenes;
     }
 
-    public ArticuloFinal(Articulo idArticulo, Binario[] imagenes) {
+    public ArticuloFinal(Articulo idArticulo, ArrayList<ImageIcon>imagenes) {
         this.articulo = idArticulo;
         this.imagenes = imagenes;
     }

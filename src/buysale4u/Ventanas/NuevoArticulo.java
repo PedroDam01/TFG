@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -259,15 +260,13 @@ public class NuevoArticulo extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public byte[] extractBytes(File imgPath) throws IOException {
+   public byte[] extractBytes(File imgPath) throws IOException {
 
-        BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-        // get DataBufferBytes from Raster
-        WritableRaster raster = bufferedImage.getRaster();
-        DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-
-        return (data.getData());
+        FileInputStream fr = new FileInputStream(imgPath);
+        byte imgB[] = new byte[(int)imgPath.length()];
+        fr.read(imgB);
+        
+        return imgB;
     }
 
     /**

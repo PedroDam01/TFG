@@ -25,6 +25,7 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -38,8 +39,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
-
-
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -72,49 +72,52 @@ public class ControlArticulos {
      */
     public static void completarArticulo(JList lista, Articulo[] array) {
         listadoArticuloFinal = new ArrayList<>();
- 
+
         Gson gson = new Gson();
         for (Articulo array1 : array) {
-            Binario[] binario =null;
+            Binario[] binario = null;
             String cadenabinario = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_IMAGENES + "?id_articulo=" + array1.getId());
-         
-           binario= gson.fromJson(cadenabinario, Binario[].class);
-            
-            ArticuloFinal galeria = new ArticuloFinal(array1, binario);
-            listadoArticuloFinal.add(galeria);
-        }
-      
-        DefaultListModel<ArticuloFinal> modelo = new DefaultListModel<>();
-        for (ArticuloFinal af:listadoArticuloFinal) {
-            modelo.addElement(af);
-            
+
+            binario = gson.fromJson(cadenabinario, Binario[].class);
+            ArrayList<ImageIcon> imagenes=new ArrayList<>();
+            if (binario.length>0) {
+                
+                for(int i=0; i< binario.length; i++) {
+                    
+                    byte[]bytes=Base64.getDecoder().decode(binario[i].getBinario());
+                   ImageIcon ii=new ImageIcon(bytes);
+                   imagenes.add(ii);
+                }
+               
+            }
+              ArticuloFinal galeria = new ArticuloFinal(array1, imagenes);
+            listadoArticuloFinal.add(galeria); 
             
            
         }
-        
+
+        DefaultListModel<ArticuloFinal> modelo = new DefaultListModel<>();
+        for (ArticuloFinal af : listadoArticuloFinal) {
+            modelo.addElement(af);
+
+        }
 
         lista.setModel(modelo);
         lista.setCellRenderer(new ArticuloRendererList());
-      
-    }
 
-   
+    }
 
     public static void insertar(ArrayList<byte[]> galeria, String titulo, String descripcion, int provincia) {
         String tituloEncode = URLEncoder.encode(titulo);
         String descripcionEncode = URLEncoder.encode(descripcion);
         String id = HttpRequest.GET_REQUEST(Constantes.URL_INSERTAR_ARTICULO + "?titulo=" + tituloEncode + "&descripcion=" + descripcionEncode + "&provincia=" + provincia + "&correo=" + Login.u.getEmail());
 
-        
-            
-        
         for (byte[] bs : galeria) {
 
-            String s = new String(bs);
-           
+            String s = Base64.getEncoder().encodeToString(bs);
+
             String json = "{\"id\":" + id + ", \"imgByte\":\"" + s + "\"}";
-            String c=HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_IMAGEN, json);
-            System.out.println(c);
+            String c = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_IMAGEN, json);
         }
 
     }
@@ -126,7 +129,7 @@ public class ControlArticulos {
             ImageIcon img = new ImageIcon(image);
             return img;
         } catch (IOException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         }
         return null;
     }

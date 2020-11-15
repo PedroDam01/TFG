@@ -43,10 +43,11 @@ public class ArticuloRendererList extends JLabel implements ListCellRenderer<Art
     public Component getListCellRendererComponent(JList<? extends ArticuloFinal> list, ArticuloFinal value, int index, boolean isSelected, boolean cellHasFocus) {
         setText(value.getIdArticulo().getTitulo());
 
-        if (value.getImagenes().length>0) {
-            byte[] decodedBytes =value.getImagenes()[0].getBinario().getBytes();
-            ImageIcon img=new ImageIcon(decodedBytes);
-            setIcon( img);
+        if (value.getImagenes().size()>0) {
+            
+            ImageIcon img=value.getImagenes().get(0);
+            
+            setIcon( new ImageIcon(img.getScaledInstance(78, 124, Image.SCALE_SMOOTH)));
         }
         
        
