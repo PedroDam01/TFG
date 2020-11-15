@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.util.Base64;
+import javax.swing.Icon;
 
 
 import javax.swing.JLabel;
@@ -46,8 +47,8 @@ public class ArticuloRendererList extends JLabel implements ListCellRenderer<Art
         if (value.getImagenes().size()>0) {
             
             ImageIcon img=value.getImagenes().get(0);
-            
-            setIcon( new ImageIcon(img.getScaledInstance(78, 124, Image.SCALE_SMOOTH)));
+            img.setImage(img.getImage().getScaledInstance(78, 78, Image.SCALE_SMOOTH));
+            setIcon(img);
         }
         
        
