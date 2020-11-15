@@ -5,11 +5,21 @@
  */
 package buysale4u.control.renderer;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+
 import entidades.ArticuloFinal;
 
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.util.Base64;
 
 
 import javax.swing.JLabel;
@@ -32,12 +42,13 @@ public class ArticuloRendererList extends JLabel implements ListCellRenderer<Art
     @Override
     public Component getListCellRendererComponent(JList<? extends ArticuloFinal> list, ArticuloFinal value, int index, boolean isSelected, boolean cellHasFocus) {
         setText(value.getIdArticulo().getTitulo());
-        if (value.getImagenes()!=null) {
-            byte[] array= Base64.decode(value.getImagenes().get(0).getBinario());
-            ImageIcon img=new ImageIcon(array);
+
+        if (value.getImagenes().length>0) {
+            byte[] decodedBytes =value.getImagenes()[0].getBinario().getBytes();
+            ImageIcon img=new ImageIcon(decodedBytes);
             setIcon( img);
         }
-       
+        
        
         return this;
     }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ArticuloFinal {
 
     Articulo articulo;
-    ArrayList<Binario> imagenes;
+    Binario[] imagenes;
 
     public Articulo getIdArticulo() {
         return articulo;
@@ -24,15 +24,15 @@ public class ArticuloFinal {
         this.articulo = idArticulo;
     }
 
-    public ArrayList<Binario> getImagenes() {
+    public  Binario[] getImagenes() {
         return imagenes;
     }
 
-    public void setImagenes(ArrayList<Binario> imagenes) {
+    public void setImagenes( Binario[] imagenes) {
         this.imagenes = imagenes;
     }
 
-    public ArticuloFinal(Articulo idArticulo, ArrayList<Binario> imagenes) {
+    public ArticuloFinal(Articulo idArticulo, Binario[] imagenes) {
         this.articulo = idArticulo;
         this.imagenes = imagenes;
     }

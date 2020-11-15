@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
@@ -231,13 +233,14 @@ public class NuevoArticulo extends javax.swing.JDialog {
             try {
                 File f = fc.getSelectedFile();
 
-                byte[] bytes = extractBytes(f);
+                
+               byte[] bytes = extractBytes(f);
                 galeria.add(bytes);
                 actualizarLista(f);
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());
-            } catch (NullPointerException | IOException e) {
+            } catch (NullPointerException e) {
                 e.printStackTrace();
+            } catch (IOException ex) {
+                Logger.getLogger(NuevoArticulo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

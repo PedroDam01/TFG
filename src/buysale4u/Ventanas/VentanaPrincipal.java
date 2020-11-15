@@ -7,9 +7,9 @@ package buysale4u.Ventanas;
 
 import buysale4u.Ventanas.paneles.Articulos;
 import buysale4u.Ventanas.paneles.PanelChat;
-import java.awt.Frame;
+
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
 
 /**
  *
@@ -46,6 +46,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton1.setText("Usuario");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/articulos.png"))); // NOI18N
@@ -104,6 +109,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         if (datos==null) {
+            datos=new VentanaPersonal();
+        
+         datos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        }
+        
+         if (!datos.isVisible()) {
+            datos.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,5 +165,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
     JFrame chatFrame=null;
+    JFrame datos=null;
     JFrame articulos=null;
 }
