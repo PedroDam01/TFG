@@ -13,10 +13,11 @@ public class Conversacion {
     
     String mail,fechaHora,texto;
 
-    public Conversacion(String texto, String fechaHora) {
+    public Conversacion(String texto, String fechaHora,String mail) {
      
         this.fechaHora = fechaHora;
         this.texto = texto;
+        this.mail=mail;
     }
 
     public String getMail() {
@@ -33,7 +34,7 @@ public class Conversacion {
 
     @Override
     public String toString() {
-        return   "{"+fechaHora +"} : " + texto + '}';
+        return   "- "+mail+" -"+"{"+fechaHora +"} : " + texto + '}';
     }
     
 }

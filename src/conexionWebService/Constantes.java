@@ -33,8 +33,16 @@ public class Constantes {
 
     public static final String URL_BORRAR_IMAGEN = URL_SERVIDOR + "borrar_imagen.php";
 
-    public static String URL_ACTUALIZAR_USUARIO;
-    public static String URL_INSERTAR_ARTICULO=URL_SERVIDOR+"nuevo_articulo.php";
-    public static String URL_LISTA_PROVINCIAS=URL_SERVIDOR+ "lista_provincias.php";
+    public static final String URL_INSERTAR_ARTICULO = URL_SERVIDOR + "nuevo_articulo.php";
+   
+    public static final String URL_LISTA_PROVINCIAS = URL_SERVIDOR + "lista_provincias.php";
+    
+    public static final String URL_CONTACTAR = URL_SERVIDOR + "contactar.php";
+    
+    public static final String URL_ACTUALIZAR_CONTRASEÑA=URL_SERVIDOR+"actualizar_c.php";
+    
+    public static final String URL_ACTUALIZAR_APELLIDO=URL_SERVIDOR+"actualizar_a.php";
+    
+    public static final String URL_ACTUALIZAR_NOMBRE=URL_SERVIDOR+"actualizar_n.php";
 
 }

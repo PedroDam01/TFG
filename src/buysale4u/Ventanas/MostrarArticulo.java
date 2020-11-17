@@ -5,11 +5,14 @@
  */
 package buysale4u.Ventanas;
 
+import buysale4u.Ventanas.paneles.NuevoMensaje;
 import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JList;
+import javax.swing.JFrame;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,9 +34,9 @@ public class MostrarArticulo extends javax.swing.JDialog {
     public MostrarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        JList listaFotos=new JList<ImageIcon>();
-        scrollLista.add(listaFotos);
+
         ControlGaleria.llenar_galeria(listaFotos);
+        System.out.println(listaFotos.getModel().getSize());
         listaFotos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -41,7 +44,7 @@ public class MostrarArticulo extends javax.swing.JDialog {
             }
         });
          texto.setEditable(false);
-         texto.setText(ControlArticulos.seleccionado.getDescripcion());
+         texto.setText(ControlArticulos.seleccionado.getIdArticulo().getDescripcion());
          
         
     }
@@ -54,42 +57,29 @@ public class MostrarArticulo extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         panelImagen = new javax.swing.JPanel();
         imagen = new javax.swing.JLabel();
         panelIconos = new javax.swing.JPanel();
         scrollLista = new javax.swing.JScrollPane();
+        listaFotos = new javax.swing.JList<>();
         panelDetalle = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         texto = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         panelImagen.setLayout(new java.awt.BorderLayout());
-        panelImagen.add(imagen, java.awt.BorderLayout.CENTER);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 377;
-        gridBagConstraints.ipady = 369;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        getContentPane().add(panelImagen, gridBagConstraints);
+        panelImagen.add(imagen, java.awt.BorderLayout.PAGE_END);
 
         panelIconos.setLayout(new java.awt.BorderLayout());
-        panelIconos.add(scrollLista, java.awt.BorderLayout.CENTER);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 181;
-        gridBagConstraints.ipady = 553;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 18, 0, 0);
-        getContentPane().add(panelIconos, gridBagConstraints);
+        scrollLista.setViewportView(listaFotos);
+
+        panelIconos.add(scrollLista, java.awt.BorderLayout.CENTER);
 
         titulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
@@ -103,10 +93,10 @@ public class MostrarArticulo extends javax.swing.JDialog {
             panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDetalleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(titulo))
-                .addContainerGap(775, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 881, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(titulo)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         panelDetalleLayout.setVerticalGroup(
             panelDetalleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,21 +105,74 @@ public class MostrarArticulo extends javax.swing.JDialog {
                 .addComponent(titulo)
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 763;
-        gridBagConstraints.ipady = 196;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 12, 0);
-        getContentPane().add(panelDetalle, gridBagConstraints);
+        jButton1.setText("Contactar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 27, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelIconos, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelIconos, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+                    .addComponent(panelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6)
+                .addComponent(panelDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame newframe = new JFrame();
+        Contactar panel = new Contactar();
+        panel.setSize(500, 500);
+        panel.setVisible(true);
+        newframe.add(panel);
+        newframe.setSize(500, 500);
+        newframe.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +218,10 @@ public class MostrarArticulo extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel imagen;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<ImageIcon> listaFotos;
     private javax.swing.JPanel panelDetalle;
     private javax.swing.JPanel panelIconos;
     private javax.swing.JPanel panelImagen;

@@ -35,7 +35,7 @@ public class Articulos extends javax.swing.JPanel {
 
             ControlArticulos.completarArticulo(lista, array);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(parent, "Error: No se pudo encontrar articulos. \n Conexion fallida");
         }
         if (lista.getModel()== null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
@@ -45,8 +45,8 @@ public class Articulos extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int indice = lista.getSelectedIndex();
-                ControlArticulos.seleccionado = (Articulo) lista.getModel().getElementAt(indice).getIdArticulo();
-                galeria = new MostrarArticulo((Frame) getParent(), true);
+                ControlArticulos.seleccionado = (ArticuloFinal) lista.getModel().getElementAt(indice);
+                galeria = new MostrarArticulo(parent, true);
                 galeria.setVisible(true);
 
             }

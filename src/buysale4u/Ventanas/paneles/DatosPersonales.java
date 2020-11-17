@@ -5,9 +5,11 @@
  */
 package buysale4u.Ventanas.paneles;
 
+import buysale4u.control.ControlUsuario;
 import buysale4u.control.Login;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -213,40 +215,36 @@ public class DatosPersonales extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        String cadena = null;
+        
         if (checkNombre.isSelected()) {
-            if (cadena.isEmpty()) {
-                cadena = "?nombre=" + nombre.getText();
+            if (nombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(checkNombre, "Para cambiar el nombre debes introducir uno nuevo");
 
             } else {
-                cadena = "&nombre=" + nombre.getText();
+                ControlUsuario.actualizar_nombre(nombre.getText());
             }
         }
         if (checkApellidos.isSelected()) {
-            if (cadena.isEmpty()) {
-                cadena = "?apellidos=" + apellidos.getText();
+            if (apellidos.getText().isEmpty()) {
+                              JOptionPane.showMessageDialog(checkNombre, "Para cambiar los apellidos debes introducir unos nuevos");
 
             } else {
-                cadena = "&apellidos=" + apellidos.getText();
+               ControlUsuario.actualizar_apellidos(nombre.getText());
             }
         }
         if (checkContraseña.isSelected()) {
-            if (cadena.isEmpty()) {
-                cadena = "?pass=" + contraseña.getText();
+            if (contraseña.getText().isEmpty()) {
+                                JOptionPane.showMessageDialog(checkNombre, "Para cambiar la contraseña debes introducir una nueva");
+
 
             } else {
-                cadena = "&pass=" + contraseña.getText();
+              ControlUsuario.actualizar_contraseña(nombre.getText());
             }
         }
 
-        enviar_valores(cadena);
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void enviar_valores(String cadena) {
-
-        HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_USUARIO+cadena);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidos;

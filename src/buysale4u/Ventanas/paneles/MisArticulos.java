@@ -8,6 +8,7 @@ package buysale4u.Ventanas.paneles;
 import buysale4u.Ventanas.MostrarArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
+import entidades.ArticuloFinal;
 import java.awt.Dialog;
 import java.awt.Frame;
 import javax.swing.DefaultListModel;
@@ -21,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  * @author PedroFB
  */
 public class MisArticulos extends javax.swing.JPanel {
- JList<Articulo> listaArticulos;
+ JList<ArticuloFinal> listaArticulos;
     Dialog galeria;
 
     /**
@@ -37,7 +38,7 @@ public class MisArticulos extends javax.swing.JPanel {
 
             ControlArticulos.completarArticulo(listaArticulos, array);
         } catch (Exception e) {
-            e.printStackTrace();
+           JOptionPane.showMessageDialog(parent, "Error: No se pudo encontrar articulos. \n Conexion fallida");
         }
         if (modelo == null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");

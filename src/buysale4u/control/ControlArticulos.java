@@ -6,10 +6,7 @@
 package buysale4u.control;
 
 import buysale4u.control.renderer.ArticuloRendererList;
-import com.google.gson.ExclusionStrategy;
-import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 import entidades.Articulo;
@@ -17,24 +14,13 @@ import entidades.Binario;
 import entidades.ArticuloFinal;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -47,7 +33,7 @@ import javax.swing.JOptionPane;
  */
 public class ControlArticulos {
 
-    public static Articulo seleccionado;
+    public static ArticuloFinal seleccionado;
     public static ArrayList<ArticuloFinal> listadoArticuloFinal;
 
     /**
@@ -79,21 +65,20 @@ public class ControlArticulos {
             String cadenabinario = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_IMAGENES + "?id_articulo=" + array1.getId());
 
             binario = gson.fromJson(cadenabinario, Binario[].class);
-            ArrayList<ImageIcon> imagenes=new ArrayList<>();
-            if (binario.length>0) {
-                
-                for(int i=0; i< binario.length; i++) {
-                    
-                    byte[]bytes=Base64.getDecoder().decode(binario[i].getBinario());
-                   ImageIcon ii=new ImageIcon(bytes);
-                   imagenes.add(ii);
+            ArrayList<ImageIcon> imagenes = new ArrayList<>();
+            if (binario.length > 0) {
+
+                for (int i = 0; i < binario.length; i++) {
+
+                    byte[] bytes = Base64.getDecoder().decode(binario[i].getBinario());
+                    ImageIcon ii = new ImageIcon(bytes);
+                    imagenes.add(ii);
                 }
-               
+
             }
-              ArticuloFinal galeria = new ArticuloFinal(array1, imagenes);
-            listadoArticuloFinal.add(galeria); 
-            
-           
+            ArticuloFinal galeria = new ArticuloFinal(array1, imagenes);
+            listadoArticuloFinal.add(galeria);
+
         }
 
         DefaultListModel<ArticuloFinal> modelo = new DefaultListModel<>();
@@ -117,21 +102,19 @@ public class ControlArticulos {
             String s = Base64.getEncoder().encodeToString(bs);
 
             String json = "{\"id\":" + id + ", \"imgByte\":\"" + s + "\"}";
-            String c = HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_IMAGEN, json);
+           HttpRequest.POST_REQUEST(Constantes.URL_INSERTAR_IMAGEN, json);
         }
 
     }
 
-    public static ImageIcon bytetoImg(byte[] bytes) {
-        try {
+    public static ImageIcon bytetoImg(byte[] bytes) throws IOException {
+        
             InputStream in = new ByteArrayInputStream(bytes);
             BufferedImage image = ImageIO.read(in);
             ImageIcon img = new ImageIcon(image);
             return img;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return null;
+       
+      
     }
 
 }

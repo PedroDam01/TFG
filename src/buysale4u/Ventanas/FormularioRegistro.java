@@ -6,6 +6,7 @@
 package buysale4u.Ventanas;
 
 import entidades.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,7 +65,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(23, 30, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("Email");
+        jLabel3.setText("Usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -132,10 +133,9 @@ public class FormularioRegistro extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (nombre.getText().isEmpty() || apellidos.getText().isEmpty() || pass.getText().isEmpty() || email.getText().isEmpty()) {
-            System.out.println("escribe todo");
+            JOptionPane.showMessageDialog(rootPane,"rellena todos los campos" );
         }else{
         Usuario usu=new Usuario (nombre.getText(),apellidos.getText(),pass.getText(),email.getText());
-            System.out.println(usu.toString());
         buysale4u.control.Login.registrar(usu );
         }
     }//GEN-LAST:event_jButton1ActionPerformed

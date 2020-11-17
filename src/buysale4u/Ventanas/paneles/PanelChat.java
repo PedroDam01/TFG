@@ -6,10 +6,11 @@
 package buysale4u.Ventanas.paneles;
 
 import buysale4u.control.Chat;
-import buysale4u.control.Login;
+
 import entidades.Conversacion;
 import entidades.Usuario;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
@@ -18,7 +19,8 @@ import javax.swing.ListModel;
  */
 public class PanelChat extends javax.swing.JPanel {
 
-    Thread actualizar;
+    //Thread actualizar;//se incorporara en la version 1.1.1
+    String email;
 
     /**
      *
@@ -29,23 +31,25 @@ public class PanelChat extends javax.swing.JPanel {
         initComponents();
         Chat.listar(listaConversaciones);
         texto.setEditable(false);
-        actualizar = new Thread(new Runnable() {
+       /** 
+        * Fase beta, version de pruebas 1.1.0
+        * actualizar = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
 
                     Chat.listar(listaConversaciones);
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(jButton1, "Error en la red");
                     }
                 }
             }
 
         });
 
-        actualizar.start();
+        //actualizar.start();*/
     }
 
     /**
@@ -74,6 +78,11 @@ public class PanelChat extends javax.swing.JPanel {
 
         panelLista.setLayout(new java.awt.GridBagLayout());
 
+        listaConversaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaConversacionesMouseClicked(evt);
+            }
+        });
         listaConversaciones.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listaConversacionesValueChanged(evt);
@@ -171,20 +180,21 @@ public class PanelChat extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Chat.enviar(texto.getText(), listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()));
+        Chat.enviar(texto.getText(), listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()).getEmail());
         llenarConversacion();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged
         llenarConversacion();
+     
     }//GEN-LAST:event_listaConversacionesValueChanged
    /**
     * 
     */
     private void llenarConversacion() {
         
-        String cadena = null;
+        String cadena = "";
         ListModel lista = listaConversaciones.getModel();
         int currentSelected = listaConversaciones.getSelectedIndex();
         if (currentSelected!=-1) {
@@ -214,9 +224,16 @@ public class PanelChat extends javax.swing.JPanel {
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
         // TODO add your handling code here:
-        Chat.borrar(listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()));
+        Chat.borrar(email);
         Chat.listar(listaConversaciones);
+        texto.setText("");
     }//GEN-LAST:event_borrarActionPerformed
+
+    private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
+        // TODO add your handling code here:
+        Usuario u=listaConversaciones.getSelectedValue();
+     email=u.getEmail();
+    }//GEN-LAST:event_listaConversacionesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -227,7 +244,7 @@ public class PanelChat extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> listaConversaciones;
+    private javax.swing.JList<Usuario> listaConversaciones;
     private javax.swing.JPanel panelLista;
     private javax.swing.JTextPane texto;
     private javax.swing.JTextArea textoEnviar;

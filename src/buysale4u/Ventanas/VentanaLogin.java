@@ -9,6 +9,7 @@ package buysale4u.Ventanas;
 import buysale4u.control.Login;
 import static buysale4u.control.Login.extraer;
 import entidades.Usuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,7 +22,7 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     public VentanaLogin() {
         initComponents();
-        setSize(536, 410);
+        setSize(536, 411);
 
     }
 
@@ -118,7 +119,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(78, 186, 19, 0);
         jPanel1.add(jButton1, gridBagConstraints);
 
-        jLabel2.setText("Email");
+        jLabel2.setText("Usuario");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -131,7 +132,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 28, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(14, 40, 0, 0);
         jPanel1.add(jLabel3, gridBagConstraints);
 
         jButton2.setFont(new java.awt.Font("Ebrima", 1, 11)); // NOI18N
@@ -169,17 +170,22 @@ public class VentanaLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (email.getText()==null || pass.getPassword()==null) {
+            JOptionPane.showMessageDialog(rootPane, "Rellena todos los campos");
+        }else{
         Usuario usuario = extraer(email.getText());
         if (usuario == null) {
-           
+            JOptionPane.showMessageDialog(rootPane, "alguno de los campos son incorrectos");
         } else {
             if (usuario.getContraseña().equals(pass.getText())) {
                 new VentanaPrincipal().setVisible(true);
                 this.setVisible(false);
                 Login.u=usuario;
             } else {
-               
+                           JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
+
             }
+        }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
