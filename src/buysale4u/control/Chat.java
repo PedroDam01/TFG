@@ -28,11 +28,9 @@ public class Chat {
      * este metodo crea e incorpora a la Jlist un modelo usando una lista de
      * usuarios obtenida del servidor
      *
-     * @param lista
+     * @param lista JList
      */
     public static void listar(JList lista) {
-
-       
 
         Usuario[] usuarios = lista_usuarios();
 
@@ -50,15 +48,16 @@ public class Chat {
     /**
      * obtiene una lista de usuarios con lo cual se ha establecido comunicacion
      *
-     * @return
+     * @return array Usuario[]
      */
     public static Usuario[] lista_usuarios() {
-
+        // inicializamos una nueva cadena de texto con el valor retornado del metodo GET_REQUEST de la clase HttpRequest
         String cadena = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_CHAT + "?correo=" + Login.u.getEmail());
-
+        //inicializamos un nuevo Objeto Gson
         Gson gson = new Gson();
+        //inicializamos un nuevo array de Usuario serializando la cadena anterior con el objeto gson
         Usuario[] array = gson.fromJson(cadena, Usuario[].class);
-
+        //retornamos el array
         return array;
 
     }
@@ -67,38 +66,40 @@ public class Chat {
      * metodo que retorna una cadena con la conversacion guardada del cliente
      * con otro usuario
      *
-     * @param u
-     * @return
+     * @param u Usuario
+     * @return array Coonversacion[]
      */
     public static Conversacion[] insertarTexto(Usuario u) {
-
+        //inicializamos una cadena json con el valor retornado del metodo GET_REQUEST de la clase HttpRequest
         String cadena = HttpRequest.GET_REQUEST(Constantes.URL_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + u.getEmail());
+        //inicializamos un nuevo objeto gson
         Gson gson = new Gson();
-       
+        //inicializamos un array de Conversacion serializando la cadena json
         Conversacion[] array = gson.fromJson(cadena, Conversacion[].class);
-        
+        //retornamos el array 
         return array;
     }
 
     /**
      * Metodo que envia un mensaje a un usuario seleccionado
      *
-     * @param texto
-     * @param mail
+     * @param texto String
+     * @param mail String
      */
     public static void enviar(String texto, String mail) {
-       String encode= URLEncoder.encode(texto);
+        //incializamos una cadena de texto codificando la cadena texto
+        String encode = URLEncoder.encode(texto);
+        //llamamos al metodo GET_REQUEST
         HttpRequest.GET_REQUEST(Constantes.URL_ENVIAR_MENSAJE + "?texto=" + encode + "&email1=" + Login.u.getEmail() + "&email2=" + mail);
-        
+
     }
 
     /**
      * Metodo que elimina la conversacion con otro usuario
      *
-     * @param email
+     * @param email String
      */
     public static void borrar(String email) {
-        String c =HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + email);
-        System.out.println(c);
+        HttpRequest.GET_REQUEST(Constantes.URL_BORRAR_CONVERSACION + "?email1=" + Login.u.getEmail() + "&email2=" + email);
     }
 }

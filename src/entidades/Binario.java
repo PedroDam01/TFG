@@ -9,7 +9,8 @@ package entidades;
 
 
 /**
- *
+ *Clase que almacena los datos, en cadena de texto de valores binarios, de una imagen
+ * en la base de datos y de el id del articulo al que corresponde
  * @author PedroFB
  */
 public class Binario {

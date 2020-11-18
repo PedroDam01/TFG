@@ -7,11 +7,11 @@ package buysale4u.Ventanas.paneles;
 
 import buysale4u.control.ControlUsuario;
 import buysale4u.control.Login;
-import conexionWebService.Constantes;
-import conexionWebService.HttpRequest;
 import javax.swing.JOptionPane;
 
 /**
+ * Interfaz grafica donde tenemos la opcion de modificar nuestros datos
+ * personales
  *
  * @author PedroFB
  */
@@ -22,10 +22,12 @@ public class DatosPersonales extends javax.swing.JPanel {
      */
     public DatosPersonales() {
         initComponents();
+        //mostramos todos los datos del usuario actual 
         nombre.setText(Login.u.getNombre());
         apellidos.setText(Login.u.getApellidos());
         email.setText(Login.u.getEmail());
         contraseña.setText(Login.u.getContraseña());
+        //deshabilitamos la edicion de los campos de texto
         nombre.setEditable(false);
         apellidos.setEditable(false);
         email.setEditable(false);
@@ -80,10 +82,20 @@ public class DatosPersonales extends javax.swing.JPanel {
                 checkApellidosStateChanged(evt);
             }
         });
+        checkApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkApellidosActionPerformed(evt);
+            }
+        });
 
         checkContraseña.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 checkContraseñaStateChanged(evt);
+            }
+        });
+        checkContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkContraseñaActionPerformed(evt);
             }
         });
 
@@ -179,11 +191,12 @@ public class DatosPersonales extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void checkNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkNombreActionPerformed
-
+        nombre.setEditable(true);
     }//GEN-LAST:event_checkNombreActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_nombreActionPerformed
 
     private void checkNombreStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_checkNombreStateChanged
@@ -215,7 +228,9 @@ public class DatosPersonales extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        
+        //comprobamos si los JCheckBox estan seleccionados
+        //en el caso de que esten seleccionados comprobamos que los campos no esten vacios
+        //si estan seleccionados los JCheckBox y los campos de texto tienen datos se procede a actualizar cada uno de los campos
         if (checkNombre.isSelected()) {
             if (nombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(checkNombre, "Para cambiar el nombre debes introducir uno nuevo");
@@ -226,25 +241,33 @@ public class DatosPersonales extends javax.swing.JPanel {
         }
         if (checkApellidos.isSelected()) {
             if (apellidos.getText().isEmpty()) {
-                              JOptionPane.showMessageDialog(checkNombre, "Para cambiar los apellidos debes introducir unos nuevos");
+                JOptionPane.showMessageDialog(checkNombre, "Para cambiar los apellidos debes introducir unos nuevos");
 
             } else {
-               ControlUsuario.actualizar_apellidos(nombre.getText());
+                ControlUsuario.actualizar_apellidos(nombre.getText());
             }
         }
         if (checkContraseña.isSelected()) {
             if (contraseña.getText().isEmpty()) {
-                                JOptionPane.showMessageDialog(checkNombre, "Para cambiar la contraseña debes introducir una nueva");
-
+                JOptionPane.showMessageDialog(checkNombre, "Para cambiar la contraseña debes introducir una nueva");
 
             } else {
-              ControlUsuario.actualizar_contraseña(nombre.getText());
+                ControlUsuario.actualizar_contraseña(nombre.getText());
             }
         }
 
-        
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void checkApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkApellidosActionPerformed
+        // TODO add your handling code here:
+        apellidos.setEditable(true);
+    }//GEN-LAST:event_checkApellidosActionPerformed
+
+    private void checkContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkContraseñaActionPerformed
+        // TODO add your handling code here:
+        contraseña.setEditable(true);
+    }//GEN-LAST:event_checkContraseñaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidos;

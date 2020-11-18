@@ -10,20 +10,20 @@ import buysale4u.Ventanas.paneles.PanelChat;
 
 import javax.swing.JFrame;
 
-
 /**
+ * Ventana donde interactuamos con las diferentes opcines del programa
+ * destinadas a los usuarios
  *
  * @author PedroFB
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-  
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-   
+
     }
 
     /**
@@ -81,13 +81,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-       
-                 
+        // Comprobamos si la ventana de chat es nula                 
         if (chatFrame == null) {
+            //si es asi la instanciamos con el constructor de la clase JFrame
             chatFrame = new JFrame();
+            //añadimos a ese frame un nuevo panel PanelChat
             chatFrame.add(new PanelChat());
+            //cambiamos la accion predeterminada al cerrar la ventana
             chatFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            //cambiamos el tamaño de la ventana
             chatFrame.setSize(500, 500);
         }
         if (!chatFrame.isVisible()) {
@@ -96,29 +98,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (articulos==null) {
-            articulos=new JFrame();
-         articulos.add(new Articulos(articulos));
-         articulos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-         articulos.setSize(500,500); 
+        //comprobamos si el JFrame articulos no esta inicializado
+        if (articulos == null) {
+            //en el caso de que no, lo inicializamos
+            articulos = new JFrame();
+            //añadimos un nuevo panel de la clase Articulos
+            articulos.add(new Articulos(articulos));
+            //cambiamos la accion predeterminada al cerrar la ventana
+
+            articulos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            //cambiamos el tamaño de la ventana
+
+            articulos.setSize(500, 500);
         }
-        
-         if (!articulos.isVisible()) {
+
+        if (!articulos.isVisible()) {
             articulos.setVisible(true);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         if (datos==null) {
-            datos=new VentanaPersonal();
-        
-         datos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        //comprobamos si el JFrame datos no esta inicializado
+
+        if (datos == null) {
+            // lo inicializamos con el constructor de la clase VentanaPersonal
+            datos = new VentanaPersonal();
+            //cambiamos la accion predeterminada al cerrar la ventana
+
+            datos.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         }
-        
-         if (!datos.isVisible()) {
+
+        if (!datos.isVisible()) {
             datos.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -164,7 +175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-    JFrame chatFrame=null;
-    JFrame datos=null;
-    JFrame articulos=null;
+    JFrame chatFrame = null;
+    JFrame datos = null;
+    JFrame articulos = null;
 }

@@ -5,16 +5,19 @@
  */
 package buysale4u.Ventanas;
 
-
 import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;
 
 /**
+ * interfaz gráfica similar a NuevoMensaje.java con la diferencia que aqui
+ * tenemos predefinido el usuario al que vamos a enviar el mensaje
  *
  * @author PedroFB
  */
 public class Contactar extends javax.swing.JPanel {
-int vendedor=ControlArticulos.seleccionado.getIdArticulo().getVendedor();
+
+    int vendedor = ControlArticulos.seleccionado.getIdArticulo().getVendedor();
+
     /**
      * Creates new form NuevoMensaje
      */
@@ -22,8 +25,6 @@ int vendedor=ControlArticulos.seleccionado.getIdArticulo().getVendedor();
         initComponents();
     }
 
-
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,10 +77,10 @@ int vendedor=ControlArticulos.seleccionado.getIdArticulo().getVendedor();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        ControlGaleria.contactar(vendedor,texto.getText());
-        
+
+        //accedemos al metodo contactar de la clase Control galeria con dos parametros de entrada, el id del vendedor y el texto del mensaje
+        ControlGaleria.contactar(vendedor, texto.getText());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

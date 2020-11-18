@@ -8,6 +8,7 @@ package buysale4u.Ventanas.paneles;
 import buysale4u.control.Chat;
 
 /**
+ * interfaz grafica destinada a crear y enviar un nuevo mensaje
  *
  * @author PedroFB
  */
@@ -89,9 +90,9 @@ public class NuevoMensaje extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        Chat.enviar(texto.getText(),email.getText());
+        // metodo para enviar un mensaje a un usuario con los datos introducidos en los campos de texto
+
+        Chat.enviar(texto.getText(), email.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -6,7 +6,7 @@
 package entidades;
 
 /**
- *
+ *Clase que almacena los datos de cada registro de la tabla Provincia de la base de datos
  * @author PedroFB
  */
 public class Provincia {

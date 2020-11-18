@@ -13,13 +13,14 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 /**
- * Clase que se encarga de renderizar los Galeria de JList
+ * Clase que se encarga de renderizar las imagenes en un JList
  *
  * @author PedroFB
  */
 public class GaleriaRendererList extends JLabel implements ListCellRenderer<ImageIcon> {
 
     public GaleriaRendererList() {
+        //cambiamos la opacidad a true
         setOpaque(true);
     }
 
@@ -28,10 +29,11 @@ public class GaleriaRendererList extends JLabel implements ListCellRenderer<Imag
 
         //imagen origen
         Image img = value.getImage();
-//escala imagen
+        //escala imagen
         Image newimg = img.getScaledInstance(78, 78, java.awt.Image.SCALE_SMOOTH);
+        //creamos nueva imagen con la instancia escalada
         ImageIcon imageIcon = new ImageIcon(newimg);
-
+        //renderizamos la imagen
         setIcon(imageIcon);
         return this;
     }

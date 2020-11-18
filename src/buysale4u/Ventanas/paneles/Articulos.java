@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,37 +17,46 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
+ * Interfaz grafica destinada a renderizar una lista de todos los articulos a la
+ * venta por los distintos usuarios
  *
  * @author PedroFB
  */
 public class Articulos extends javax.swing.JPanel {
 
-    
     Dialog galeria;
 
-    /**
-     * Creates new form Articulos
-     */
+   /**
+    * 
+    * @param parent Frame 
+    */
     public Articulos(Frame parent) {
         initComponents();
-        
-        try {
-            Articulo[] array = ControlArticulos.listar();
 
+        try {
+            //inicializamos un array de Articulos e introducimos los valores de la BD
+            Articulo[] array = ControlArticulos.listar();
+            //Introducimos los datos de los articulos en el modelo de la lista
             ControlArticulos.completarArticulo(lista, array);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(parent, "Error: No se pudo encontrar articulos. \n Conexion fallida");
         }
-        if (lista.getModel()== null) {
+        //comprobamos si los datos se han cargado correctamente en el modelo
+        if (lista.getModel() == null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
         }
-
+        //añadimos un control ante un evento del JList
         lista.addListSelectionListener(new ListSelectionListener() {
             @Override
+            //funcion a realizar cuando seleccionamos un elemento del JList
             public void valueChanged(ListSelectionEvent e) {
+                //guardamos el indice del elemento seleccionado en una nueva variable
                 int indice = lista.getSelectedIndex();
+                //Guardamos el objeto seleccionado en la variable local de la clase ControlArticulos
                 ControlArticulos.seleccionado = (ArticuloFinal) lista.getModel().getElementAt(indice);
+                //Creamos un nuevo dialog con el constructor de la clase MostrarArticulo.java
                 galeria = new MostrarArticulo(parent, true);
+
                 galeria.setVisible(true);
 
             }

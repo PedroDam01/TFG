@@ -10,16 +10,18 @@ import buysale4u.control.Chat;
 import entidades.Conversacion;
 import entidades.Usuario;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
- * 
+ * Interfaz grafica destinada a mostrar las conversaciones abiertas con los
+ * demas usuarios, enviar mensajes y mostrar los mensajes enviados y recibidos
+ *
  * @author PedroFB
  */
 public class PanelChat extends javax.swing.JPanel {
 
-    //Thread actualizar;//se incorporara en la version 1.1.1
+    //Thread actualizar;    se incorporara en la version siguiente
+    //variable cadena de texto donde almacenamos el email del usuario receptor del mensaje
     String email;
 
     /**
@@ -31,25 +33,20 @@ public class PanelChat extends javax.swing.JPanel {
         initComponents();
         Chat.listar(listaConversaciones);
         texto.setEditable(false);
-       /** 
-        * Fase beta, version de pruebas 1.1.0
-        * actualizar = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-
-                    Chat.listar(listaConversaciones);
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        JOptionPane.showMessageDialog(jButton1, "Error en la red");
-                    }
-                }
-            }
-
-        });
-
-        //actualizar.start();*/
+        /**
+         * Fase beta, version de pruebas se incorpora en la version siguiente
+         * actualizar = new Thread(new Runnable() {
+         *
+         * @Override public void run() { while (true) {
+         *
+         * Chat.listar(listaConversaciones); try { Thread.sleep(2000); } catch
+         * (InterruptedException e) { JOptionPane.showMessageDialog(jButton1,
+         * "Error en la red"); } } }
+         *
+         * });
+         *
+         * //actualizar.start();
+         */
     }
 
     /**
@@ -179,60 +176,77 @@ public class PanelChat extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // metodo para enviar un mensaje con los datos de los campos introducidos
         Chat.enviar(texto.getText(), listaConversaciones.getModel().getElementAt(listaConversaciones.getSelectedIndex()).getEmail());
+        //introducimos los datos de la conversacion 
         llenarConversacion();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listaConversacionesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaConversacionesValueChanged
+        //introducimos los datos de la conversacion 
         llenarConversacion();
-     
+
     }//GEN-LAST:event_listaConversacionesValueChanged
-   /**
-    * 
-    */
+    /**
+     * Metodo con el cual introducimos los datos de la conversacion con un
+     * usuario en un campo de texto de la interfaz grafica
+     */
     private void llenarConversacion() {
-        
+        //cadena de texto en la que concatenamos los datos de los mensajes
         String cadena = "";
+        //inicializamos un nuevo modelo de lista con el modelo de la lista listaConversaciones
         ListModel lista = listaConversaciones.getModel();
+        //nueva variable numerica donde introducimos el valor del indice seleccionado
         int currentSelected = listaConversaciones.getSelectedIndex();
-        if (currentSelected!=-1) {
-           Usuario currentUser = (Usuario) lista.getElementAt(currentSelected);
-       
-        Conversacion[] conversacion = Chat.insertarTexto(currentUser);
-        for (Conversacion c : conversacion) {
-            cadena = cadena + "\n" + c.toString();
+        //comprobamos que sea un indice valido
+        if (currentSelected != -1) {
+            // inicializamos un nuevo objeto de Usuario con el elemento seleccionado de la lista
+            Usuario currentUser = (Usuario) lista.getElementAt(currentSelected);
+            //inicializamos una array de Conversacion con los datos de retorno del metodo insertarTexto de la clase Chat
+            Conversacion[] conversacion = Chat.insertarTexto(currentUser);
+            //iteramos el anterior array para extraer los datos
+            for (Conversacion c : conversacion) {
+                //concatenamos la cadena de texto con los datos de la conversacion
+                cadena = cadena + "\n" + c.toString();
+            }
+            //mostramos los datos de la cadena de texto en la interfaz grafica
+            texto.setText(cadena);
         }
-        texto.setText(cadena); 
-        }
-        
-    
+
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
+        //creamos una nueva ventana
         JFrame newframe = new JFrame();
+        //creamos un nuevo panel con el constructor de la clase NuevoMensaje
         NuevoMensaje panel = new NuevoMensaje();
+        //cambiamos el tamaño del panel
         panel.setSize(500, 500);
+        // hacemos visible el panel
         panel.setVisible(true);
+        //añadimos el panel a la ventana
         newframe.add(panel);
+        //cambiamos el tamaño de la ventana
         newframe.setSize(500, 500);
+        //hacemos visible la ventana
         newframe.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void borrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarActionPerformed
-        // TODO add your handling code here:
+        //borramos la conversacion con el usuario seleccionado
         Chat.borrar(email);
+        //volvemos a listar los datos de las conversaciones en la lista
         Chat.listar(listaConversaciones);
+        //eliminamos todo el texto del campo texto
         texto.setText("");
     }//GEN-LAST:event_borrarActionPerformed
 
     private void listaConversacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaConversacionesMouseClicked
-        // TODO add your handling code here:
-        Usuario u=listaConversaciones.getSelectedValue();
-     email=u.getEmail();
+        // inicializamos un nuevo usuario con el elemento seleccionado de la lista
+        Usuario u = listaConversaciones.getSelectedValue();
+        // cambiamos el valor del campo email por el email del usuario anterior
+        email = u.getEmail();
     }//GEN-LAST:event_listaConversacionesMouseClicked
 
 

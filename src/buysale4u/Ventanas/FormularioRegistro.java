@@ -9,6 +9,7 @@ import entidades.Usuario;
 import javax.swing.JOptionPane;
 
 /**
+ * Interfaz grafica destinada al registro de un nuevo usuario
  *
  * @author PedroFB
  */
@@ -131,12 +132,15 @@ public class FormularioRegistro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //comprobamos si algun campo esta vacio
         if (nombre.getText().isEmpty() || apellidos.getText().isEmpty() || pass.getText().isEmpty() || email.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane,"rellena todos los campos" );
-        }else{
-        Usuario usu=new Usuario (nombre.getText(),apellidos.getText(),pass.getText(),email.getText());
-        buysale4u.control.Login.registrar(usu );
+            // en el caso de que asi sea mostramos una ventana de error
+            JOptionPane.showMessageDialog(rootPane, "rellena todos los campos");
+        } else {
+            //en el caso de que tengamos todos los datos creamos un nuevo usuario
+            Usuario usu = new Usuario(nombre.getText(), apellidos.getText(), pass.getText(), email.getText());
+            //llamamos al metodo registrar de la clase Login pasando como parametro de entrada el nuevo usuario
+            buysale4u.control.Login.registrar(usu);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

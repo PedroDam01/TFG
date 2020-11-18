@@ -20,12 +20,16 @@ import javax.swing.ListCellRenderer;
 public class UsuarioRendererList extends JLabel implements ListCellRenderer<Usuario>{
 
     public UsuarioRendererList(){
+        //cambiamos la opacidad a true
         setOpaque(false);
     }
     @Override
     public Component getListCellRendererComponent(JList<? extends Usuario> list, Usuario value, int index, boolean isSelected, boolean cellHasFocus) {
+        //inicializamos una cadena de texto con el valor del campo email
         String texto= value.getEmail();
+        //cambiamos el texto que se muestra por la cadena de texto anterior        
         setText(texto);
+        
         return this;
     }
 

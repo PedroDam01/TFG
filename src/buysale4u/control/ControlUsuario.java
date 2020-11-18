@@ -9,19 +9,28 @@ import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 
 /**
- *
+ *Clase que almacena la logica para sobreescribir los datos de los usuarios
  * @author PedroFB
  */
 public class ControlUsuario {
-
+/**
+ * Metodo utilizado para cambiar la contraseña de los usuarios
+ * @param text String
+ */
     public static void actualizar_contraseña(String text) {
         HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_CONTRASEÑA+"?nuevo="+text+"&email="+Login.u.getEmail());
     }
-
+/**
+ * Metodo utilizado para cambiar los apellidos de los usuarios
+ * @param text String
+ */
     public static void actualizar_apellidos(String text) {
            HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_APELLIDO+"?nuevo="+text+"&email="+Login.u.getEmail());
     }
-
+/**
+ * Metodo utilizado para cambiar el nombre de los usuarios
+ * @param text String
+ */
     public static void actualizar_nombre(String text) {
             HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_NOMBRE+"?nuevo="+text+"&email="+Login.u.getEmail());
     }

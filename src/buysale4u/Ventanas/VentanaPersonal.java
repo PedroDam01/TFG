@@ -10,6 +10,8 @@ import buysale4u.Ventanas.paneles.MisArticulos;
 import java.awt.Dialog;
 
 /**
+ * Ventana donde podemos mostar los articulos creados por nosotros, crear un
+ * nuevo articulo o modificar nuestros datos personales
  *
  * @author PedroFB
  */
@@ -89,19 +91,23 @@ public class VentanaPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  Dialog nuevo=new  NuevoArticulo(this, rootPaneCheckingEnabled);
+        //Creamos un nuevo Dialog y lo instanciamos con el constructor de la clase NuevoArticulo
+        Dialog nuevo = new NuevoArticulo(this, rootPaneCheckingEnabled);
+        //cambiamos el valor de visible del nuevo dialog a true
         nuevo.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        panelCentral= new DatosPersonales();
+        // instanciamos el panel central(Componente local panelCentral) con el constructor de la clase DatosPersonales
+        panelCentral = new DatosPersonales();
+        // cambiamos el valor visible del anterior panel a true
         panelCentral.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        panelCentral=new MisArticulos(this);
+        // instanciamos el panel central(Componente local panelCentral) con el constructor de la clase MisArticulos
+        panelCentral = new MisArticulos(this);
+        // cambiamos el valor visible del anterior panel a true
         panelCentral.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -10,17 +10,10 @@ import com.google.gson.Gson;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
 import entidades.Provincia;
-
-
 import java.io.File;
 import java.io.FileInputStream;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -30,39 +23,56 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
+ * Interfaz grafica donde introducimos todos los datos para el nuevo articulo
+ * que guardaremos en la base de datos
  *
  * @author PedroFB
  */
 public class NuevoArticulo extends javax.swing.JDialog {
 
+    //coleccion de array de bytes donde se almacenan, en binario, las imagenes del articulo
     ArrayList<byte[]> galeria;
-    
+//Coleccion de cadenas de texto donde almacenamos el nombre de la imagen que añadiremos al articulo
     ArrayList<String> elementos;
+    //array de objetos de la clase Provincia 
     Provincia[] listaProvincias;
-
-    /**
-     * Creates new form NuevoArticulo
-     */
+/**
+ * Constructor 
+ * @param parent
+ * @param modal 
+ */
     public NuevoArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
-        
-       
+//llamamos al metodo local para crear un modelo para el objeto JComboBox pasando como parametros dicho objeto
         modeloProvincias(provincia);
+        //inicializamos las colecciones
         galeria = new ArrayList<>();
         elementos = new ArrayList<>();
     }
 
+    /**
+     * Metodo con el que añadimos las cadenas de texto con los nombres de las
+     * provincias en un JComboBox
+     *
+     * @param jcb
+     */
     private void modeloProvincias(JComboBox jcb) {
+        //instanciamos un nuevo objeto DefaultComboBoxModel y lo inicializamos
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        //inicializamos una nueva cadena de texto con la cadena de texto que retorna del metodo GET_REQUEST
         String json = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_PROVINCIAS);
-
+        //inicializamos un nuevo objeto Gson
         Gson gson = new Gson();
+        //usamos el objeto Gson para deserializar la cadena JSON en un array de Provincia local
         listaProvincias = gson.fromJson(json, Provincia[].class);
+        // iniciamos un bucle iterando el anterior array
         for (Provincia listaProvincia : listaProvincias) {
+            //añadimos elementos al modelo del JComboBox con la cadena de texto de las provincias
             modelo.addElement(listaProvincia.getNombre());
         }
+        //cambiamos el modelo actual por el modelo creado anteriormente
         jcb.setModel(modelo);
     }
 
@@ -217,29 +227,32 @@ public class NuevoArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
 
+        //inicializamos un objeto JFileChooser donde elegiremos los archivos para el articulo
         JFileChooser fc = new JFileChooser();
         //Se crea el filtro. El primer parámetro es el mensaje que se muestra,
         //el segundo es la extensión de los ficheros que se van a mostrar      
         FileFilter filtro = new FileNameExtensionFilter("Imagen (.jpg)", "jpg");
         //Se le asigna al JFileChooser el filtro
         fc.setFileFilter(filtro);
+        //recogemos un valor numerico que nos dira si realizamos una funcion valida en el objeto JFileChooser
         int valor = fc.showOpenDialog(fc);
-
+//comprobamos el anterior valor para comparar si es una opcion valida
         if (valor == JFileChooser.APPROVE_OPTION) {
 
             try {
+                //instanciamos un nuevo archivo con el archivo que hemos seleccionado 
                 File f = fc.getSelectedFile();
-
-                
-               byte[] bytes = extractBytes(f);
+                //extraemos el valor binario del archivo con el metodo extractBytes
+                byte[] bytes = extractBytes(f);
+                //añadimos a la coleccion galeria el valor binario anterior
                 galeria.add(bytes);
+                //llamamos al metodo actualizarLista
                 actualizarLista(f);
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(rootPane, "no has seleccionado un archivo");
             } catch (IOException ex) {
-                Logger.getLogger(NuevoArticulo.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, "no has seleccionado un archivo valido");
             }
         }
 
@@ -247,23 +260,33 @@ public class NuevoArticulo extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        //comparamos si los campos titulo(cadena de texto) y provincia (JComboBox) no estan vacios
         if (titulo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "no has añadido titulo");
         } else if (provincia.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(rootPane, "selecciona una provincia");
         } else {
+            //si no estan vacios llamamos al metodo insertar de ControlArticulos
             ControlArticulos.insertar(galeria, titulo.getText(), descripcion.getText(), listaProvincias[provincia.getSelectedIndex()].getId());
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
-   public byte[] extractBytes(File imgPath) throws IOException {
-
+    /**
+     * Metodo que retorna un array de bytes con el valor binario del fichero
+     * pasado por parametros
+     *
+     * @param imgPath File
+     * @return imgB byte[]
+     * @throws IOException 
+     */
+    public byte[] extractBytes(File imgPath) throws IOException {
+        //Creamos un FileInputStream con el fichero pasado por parametros
         FileInputStream fr = new FileInputStream(imgPath);
-        byte imgB[] = new byte[(int)imgPath.length()];
+        //creamos un nuevo array de bytes con la longitud de bytes del fichero
+        byte imgB[] = new byte[(int) imgPath.length()];
+        //extraemos los bytes del fichero con el objeto FileInputStream y añadimos los datos al array de bytes
         fr.read(imgB);
-        
+        //retornamos el array de bytes
         return imgB;
     }
 
@@ -326,15 +349,23 @@ public class NuevoArticulo extends javax.swing.JDialog {
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * metodo con el que añadimos a un nuevo modelo de lista los datos de las
+     * cadenas de texto almacenados en la coleccion elementos
+     *
+     * @param f File
+     */
     private void actualizarLista(File f) {
-
+        //instanciamos un nuevo DefaultListModel
         DefaultListModel<String> modelo = new DefaultListModel();
+        //añadimos el nombre del fichero a la coleccion elementos
         elementos.add(f.getName());
+        //iteramos la coleccion elementos
         for (String elemento : elementos) {
+            //añadimos como elemento al modelo creado anteriormente las cadenas de texto de la coleccion
             modelo.addElement(elemento);
         }
-            
-        
+        //sustituimos el modelo actual del JList por el creado en este metodo
         list.setModel(modelo);
     }
 }

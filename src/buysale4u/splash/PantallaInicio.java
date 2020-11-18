@@ -1,7 +1,4 @@
-
 package buysale4u.splash;
-
-
 
 import buysale4u.Ventanas.VentanaLogin;
 import com.sun.awt.AWTUtilities;
@@ -9,20 +6,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Esta clase mostrara una pantalla de inicio que se desvanecera con el tiempo
  *
  * @author PedroFB
  */
-public class PantallaCarga extends javax.swing.JFrame implements Runnable{
+public class PantallaInicio extends javax.swing.JFrame implements Runnable {
+// creamos un nuevo hilo de ejecucion
 
     private Thread tiempo = null;
+
     /**
-     * creando nueva ventana PantallaCarga
+     * creando nueva ventana PantallaInicio
      */
-    public PantallaCarga() {
+    public PantallaInicio() {
         initComponents();
         this.setLocationRelativeTo(null);
+
         AWTUtilities.setWindowOpaque(this, false);
-        tiempo= new Thread(this);
+        tiempo = new Thread(this);
         tiempo.start();
     }
 
@@ -61,11 +62,11 @@ public class PantallaCarga extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args incio de hilo de ejecucion
+     * @param args incio de hilo de ejecucion principal
      */
     public static void main(String args[]) {
         //Cambio de apariencia de la ventana 
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -74,20 +75,21 @@ public class PantallaCarga extends javax.swing.JFrame implements Runnable{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PantallaCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PantallaCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PantallaCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PantallaCarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PantallaCarga().setVisible(true);
+                new PantallaInicio().setVisible(true);
             }
         });
     }
@@ -96,25 +98,30 @@ public class PantallaCarga extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
   /**
-   * hilo que controla el tiempo de la pantalla de carga
-   */
+     * ejecucion de hilo que controla el tiempo de la pantalla de carga
+     */
     @Override
     @SuppressWarnings("empty-statement")
-    public void run(){
-        while(tiempo!= null){
+    public void run() {
+        //comprueba que el hilo no sea nulo
+        while (tiempo != null) {
             try {
-
+                //para el hilo de ejecucion principal
                 Thread.sleep(3000);
+                //cierra esta ventana
                 this.dispose();
-                VentanaLogin log=new VentanaLogin();
+                //inicializa un objeto VentanaLogin
+                VentanaLogin log = new VentanaLogin();
+                //hace visible la ventana 
                 log.setVisible(true);
-                
+                //para el hilo 
                 Thread.sleep(5000);
-                tiempo=null;
+                //cambia el valor del hilo secundario a null
+                tiempo = null;
             } catch (InterruptedException ex) {
-                Logger.getLogger(PantallaCarga.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PantallaInicio.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        tiempo=null;
-}
+        tiempo = null;
+    }
 }

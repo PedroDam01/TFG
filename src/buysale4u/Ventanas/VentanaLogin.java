@@ -5,13 +5,14 @@
  */
 package buysale4u.Ventanas;
 
-
 import buysale4u.control.Login;
 import static buysale4u.control.Login.extraer;
 import entidades.Usuario;
 import javax.swing.JOptionPane;
 
 /**
+ * Interfaz grafica donde introducimos los datos de usuario para iniciar sesion
+ * o donde accedemos a la ventana para registrarnos como nuevo usuario
  *
  * @author PedroFB
  */
@@ -22,6 +23,7 @@ public class VentanaLogin extends javax.swing.JFrame {
      */
     public VentanaLogin() {
         initComponents();
+        //modificamos el tamaño de la ventana
         setSize(536, 411);
 
     }
@@ -169,30 +171,39 @@ public class VentanaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (email.getText()==null || pass.getPassword()==null) {
-            JOptionPane.showMessageDialog(rootPane, "Rellena todos los campos");
-        }else{
-        Usuario usuario = extraer(email.getText());
-        if (usuario == null) {
-            JOptionPane.showMessageDialog(rootPane, "alguno de los campos son incorrectos");
-        } else {
-            if (usuario.getContraseña().equals(pass.getText())) {
-                new VentanaPrincipal().setVisible(true);
-                this.setVisible(false);
-                Login.u=usuario;
-            } else {
-                           JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
 
+        //comprobamos si los campos de texto de usuario y contraseña estan vacios
+        if (email.getText() == null || pass.getPassword() == null) {
+            JOptionPane.showMessageDialog(rootPane, "Rellena todos los campos");
+        } else {
+            // en caso de que no instanciamos un nuevo usuario con el metodo extraer 
+            Usuario usuario = extraer(email.getText());
+            //Comprobamos si el nuevo usuario es nulo
+            if (usuario == null) {
+
+                JOptionPane.showMessageDialog(rootPane, "alguno de los campos son incorrectos");
+            } else {
+                //si el nuevo usuario no es nulo comprobamos la contraseña para ver si es igual a la del usuario obtenido
+                if (usuario.getContraseña().equals(pass.getText())) {
+                    //en el caso de que sea igual creamos una nueva VentanaPrincipal y cambiamos el valor visible a verdadero
+                    new VentanaPrincipal().setVisible(true);
+                    //cambiamos el valor de visible de la ventana actual a falso
+                    this.setVisible(false);
+                    //en el objeto local de la clase Usuario guardamos los datos del usuario extraido
+                    Login.u = usuario;
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta");
+
+                }
             }
-        }
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // creamos un nuevo objeto de la clase FormularioRegistro y lo instanciamos
         FormularioRegistro formulario = new FormularioRegistro();
+        //cambiamos el valor visible de esta ventana a true
         formulario.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

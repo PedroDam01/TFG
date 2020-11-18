@@ -5,7 +5,6 @@
  */
 package buysale4u.Ventanas;
 
-import buysale4u.Ventanas.paneles.NuevoMensaje;
 import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;
 
@@ -16,37 +15,37 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-
-
-
-
-
 /**
+ * Interfaz grafica usada para renderizar los datos de los articulos
  *
  * @author PedroFB
  */
 public class MostrarArticulo extends javax.swing.JDialog {
 
-    /**
-     * 
-     * Creates new form MostrarArticulo
-     */
+   /**
+    *   * Creates new form MostrarArticulo
+    * @param parent Frame
+    * @param modal boolean
+    */
     public MostrarArticulo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        // llamos al metodo llenar_galeria de Control galeria 
+        //pasando como parametro la JList en la que queremos incorporar las imagenes
         ControlGaleria.llenar_galeria(listaFotos);
-        System.out.println(listaFotos.getModel().getSize());
+        //creamos un listSelectionListener para la anterior JList
         listaFotos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                //Cuando seleccionamos un elemento de la JList cambiamos el icono del JLabel para renderizar la imagen
                 imagen.setIcon((Icon) listaFotos.getModel().getElementAt(listaFotos.getSelectedIndex()));
             }
         });
-         texto.setEditable(false);
-         texto.setText(ControlArticulos.seleccionado.getIdArticulo().getDescripcion());
-         
-        
+        //cambiamos la propiedad que permite al usuario editar(introducir datos) en el JTextArea destinado a la descripcion del articulo
+        texto.setEditable(false);
+        //introducimos el texto referente a la descripcion del articulo seleccionado en la ventana Articulos.java
+        texto.setText(ControlArticulos.seleccionado.getIdArticulo().getDescripcion());
+
     }
 
     /**
@@ -162,15 +161,22 @@ public class MostrarArticulo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+
+        //creamos un nuevo JFrame donde renderizar el panel Contactar
         JFrame newframe = new JFrame();
+        //Creamos un objeto de la clase Contactar.java
         Contactar panel = new Contactar();
+        //Cambiamos el tamaño del panel (el objeto creado anteriormente) 
         panel.setSize(500, 500);
+        //Cambiamos el valor Visible del panel 
         panel.setVisible(true);
+        //Añadimos el panel al nuevo JFrame
         newframe.add(panel);
+        //Cambiamos el tamaño del JFrame para que se adapte al panel
         newframe.setSize(500, 500);
+        //Cambiamos el valor Visible del JFrame 
         newframe.setVisible(true);
+        //Cambiamos el valor Visible de la ventana actual 
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -6,7 +6,7 @@
 package entidades;
 
 /**
- *
+ *Clase que almacena los datos de un mensaje enviado de un usuario a otro
  * @author PedroFB
  */
 public class Conversacion {

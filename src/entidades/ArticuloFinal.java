@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Clase que obtiene los datos de un articulo de la base de datos y todas las fotos
+ * correspondientes a ese articulo
  * @author PedroFB
  */
 public class ArticuloFinal {
