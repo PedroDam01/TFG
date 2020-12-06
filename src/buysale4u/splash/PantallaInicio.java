@@ -1,6 +1,6 @@
 package buysale4u.splash;
 
-import buysale4u.Ventanas.VentanaLogin;
+import buysale4u.swing.VentanaLogin;
 import com.sun.awt.AWTUtilities;
 import java.util.logging.Level;
 import java.util.logging.Logger;

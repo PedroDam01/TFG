@@ -46,16 +46,27 @@ public class ControlArticulos {
      *
      * @return articulos Articulo[]
      */
-    public static Articulo[] listar() {
+    public static Articulo[] listar(boolean pertenece) {
+        if (pertenece) {
+            //cadena json con los datos de los articulos
+        String json = HttpRequest.GET_REQUEST(Constantes.URL_MIS_ARTICULOS+"?usuario="+Login.u.getEmail());
+        //objeto Gson
+        Gson gson = new Gson();
+            System.out.println(json);
+        //serializacion del json a array de Articulo
+        Articulo[] articulos = gson.fromJson(json, Articulo[].class);
+
+        return articulos;
+        }else{
         //cadena json con los datos de los articulos
-        String json = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_ARTICULOS);
+        String json = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_ARTICULOS+"?usuario="+Login.u.getEmail());
         //objeto Gson
         Gson gson = new Gson();
         //serializacion del json a array de Articulo
         Articulo[] articulos = gson.fromJson(json, Articulo[].class);
 
         return articulos;
-
+        }
     }
 
     /**

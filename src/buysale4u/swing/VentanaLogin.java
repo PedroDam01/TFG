@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas;
+package buysale4u.swing;
 
 import buysale4u.control.Login;
 import static buysale4u.control.Login.extraer;

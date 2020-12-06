@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas;
+package buysale4u.swing.galeria;
 
+import buysale4u.swing.galeria.Contactar;
 import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;
+import conexionWebService.Constantes;
+import conexionWebService.HttpRequest;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -22,14 +25,16 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MostrarArticulo extends javax.swing.JDialog {
 
+    static boolean bandera;
    /**
     *   * Creates new form MostrarArticulo
     * @param parent Frame
     * @param modal boolean
     */
-    public MostrarArticulo(java.awt.Frame parent, boolean modal) {
+    public MostrarArticulo(java.awt.Frame parent, boolean modal,boolean pertenece) {
         super(parent, modal);
         initComponents();
+        this.bandera=pertenece;
         // llamos al metodo llenar_galeria de Control galeria 
         //pasando como parametro la JList en la que queremos incorporar las imagenes
         ControlGaleria.llenar_galeria(listaFotos);
@@ -45,6 +50,11 @@ public class MostrarArticulo extends javax.swing.JDialog {
         texto.setEditable(false);
         //introducimos el texto referente a la descripcion del articulo seleccionado en la ventana Articulos.java
         texto.setText(ControlArticulos.seleccionado.getIdArticulo().getDescripcion());
+        if (pertenece) {
+            contactar.setVisible(false);
+        }else{
+            eliminar.setVisible(false);
+        }
 
     }
 
@@ -67,7 +77,8 @@ public class MostrarArticulo extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         texto = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        contactar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,10 +118,17 @@ public class MostrarArticulo extends javax.swing.JDialog {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Contactar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        contactar.setText("Contactar");
+        contactar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                contactarActionPerformed(evt);
+            }
+        });
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
             }
         });
 
@@ -119,14 +137,18 @@ public class MostrarArticulo extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contactar)
+                    .addComponent(eliminar))
                 .addGap(0, 27, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jButton1)
+                .addComponent(contactar)
+                .addGap(18, 18, 18)
+                .addComponent(eliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,7 +182,7 @@ public class MostrarArticulo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void contactarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactarActionPerformed
 
         //creamos un nuevo JFrame donde renderizar el panel Contactar
         JFrame newframe = new JFrame();
@@ -178,7 +200,13 @@ public class MostrarArticulo extends javax.swing.JDialog {
         newframe.setVisible(true);
         //Cambiamos el valor Visible de la ventana actual 
         setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_contactarActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        
+        HttpRequest.GET_REQUEST(Constantes.URL_BORRADO+"?id_articulo="+ControlArticulos.seleccionado.getIdArticulo().getId());
+        
+    }//GEN-LAST:event_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,7 +238,7 @@ public class MostrarArticulo extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarArticulo dialog = new MostrarArticulo(new javax.swing.JFrame(), true);
+                MostrarArticulo dialog = new MostrarArticulo(new javax.swing.JFrame(), true,bandera);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -223,8 +251,9 @@ public class MostrarArticulo extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton contactar;
+    private javax.swing.JButton eliminar;
     private javax.swing.JLabel imagen;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<ImageIcon> listaFotos;

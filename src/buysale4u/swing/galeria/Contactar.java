@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas;
+package buysale4u.swing.galeria;
 
 import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;

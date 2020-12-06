@@ -44,5 +44,6 @@ public class Constantes {
     public static final String URL_ACTUALIZAR_APELLIDO=URL_SERVIDOR+"actualizar_a.php";
     
     public static final String URL_ACTUALIZAR_NOMBRE=URL_SERVIDOR+"actualizar_n.php";
+    public static String URL_MIS_ARTICULOS=URL_SERVIDOR+"mis_articulos.php";
 
 }

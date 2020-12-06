@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas.paneles;
+package buysale4u.swing.usuarios;
 
 import buysale4u.control.ControlUsuario;
 import buysale4u.control.Login;

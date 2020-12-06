@@ -4,9 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas.paneles;
+package buysale4u.swing.articulos;
 
-import buysale4u.Ventanas.MostrarArticulo;
+import buysale4u.swing.galeria.MostrarArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
 import entidades.ArticuloFinal;
@@ -35,7 +35,7 @@ public class Articulos extends javax.swing.JPanel {
 
         try {
             //inicializamos un array de Articulos e introducimos los valores de la BD
-            Articulo[] array = ControlArticulos.listar();
+            Articulo[] array = ControlArticulos.listar(false);
             //Introducimos los datos de los articulos en el modelo de la lista
             ControlArticulos.completarArticulo(lista, array);
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class Articulos extends javax.swing.JPanel {
                 //Guardamos el objeto seleccionado en la variable local de la clase ControlArticulos
                 ControlArticulos.seleccionado = (ArticuloFinal) lista.getModel().getElementAt(indice);
                 //Creamos un nuevo dialog con el constructor de la clase MostrarArticulo.java
-                galeria = new MostrarArticulo(parent, true);
+                galeria = new MostrarArticulo(parent, true,false);
 
                 galeria.setVisible(true);
 

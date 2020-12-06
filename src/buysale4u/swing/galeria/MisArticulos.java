@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas.paneles;
+package buysale4u.swing.galeria;
 
-import buysale4u.Ventanas.MostrarArticulo;
+import buysale4u.swing.galeria.MostrarArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
 import entidades.ArticuloFinal;
@@ -41,11 +41,12 @@ public class MisArticulos extends javax.swing.JPanel {
         listaArticulos = new JList<>();
         try {
             //introducimos los datos de los articulos de la base de datos en un array de Articulos
-            Articulo[] array = ControlArticulos.listar();
+            Articulo[] array = ControlArticulos.listar(true);
             //completamos los articulos con las imagenes correspondientes y los añadimos al modelo 
             ControlArticulos.completarArticulo(listaArticulos, array);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(parent, "Error: No se pudo encontrar articulos. \n Conexion fallida");
+            e.printStackTrace();
         }
         //comprobamos que el modelo no sea nulo
         if (modelo == null) {
@@ -60,7 +61,7 @@ public class MisArticulos extends javax.swing.JPanel {
                 //cambiamos el valor del articulo seleccionado con el elemento seleccionado de la lista
                 ControlArticulos.seleccionado = listaArticulos.getModel().getElementAt(indice);
                 //abrimos una nueva interfaz grafica con el constructor de la clase MostrarArticulo
-                galeria = new MostrarArticulo((Frame) getParent(), true);
+                galeria = new MostrarArticulo((Frame) getParent(), true,true);
                 galeria.setVisible(true);
 
             }

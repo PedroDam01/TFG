@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package buysale4u.Ventanas;
+package buysale4u.swing;
 
-import buysale4u.Ventanas.paneles.Articulos;
-import buysale4u.Ventanas.paneles.PanelChat;
+import buysale4u.swing.usuarios.VentanaPersonal;
+import buysale4u.swing.articulos.Articulos;
+import buysale4u.swing.usuarios.PanelChat;
 
 import javax.swing.JFrame;
 
