@@ -24,8 +24,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MisArticulos extends javax.swing.JPanel {
 
-    //lista de articulos finales
-    JList<ArticuloFinal> listaArticulos;
+   
     //objeto dialog    
     Dialog galeria;
 
@@ -35,10 +34,8 @@ public class MisArticulos extends javax.swing.JPanel {
      */
     public MisArticulos(Frame parent) {
         initComponents();
-        //creamos un nuevo modelo de lista y lo inicializamos a null
-        DefaultListModel modelo = null;
-        //inicializamos la lista de articulos finales
-        listaArticulos = new JList<>();
+       
+        
         try {
             //introducimos los datos de los articulos de la base de datos en un array de Articulos
             Articulo[] array = ControlArticulos.listar(true);
@@ -49,7 +46,7 @@ public class MisArticulos extends javax.swing.JPanel {
             e.printStackTrace();
         }
         //comprobamos que el modelo no sea nulo
-        if (modelo == null) {
+        if (listaArticulos.getModel() == null) {
             JOptionPane.showMessageDialog(parent, "actualmente no se encuentran anuncios de articulos");
         }
         //creamos un manejador de eventos, concretamente el evento seleccionar de la lista
@@ -80,13 +77,18 @@ public class MisArticulos extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+        listaArticulos = new javax.swing.JList<>();
 
         setLayout(new java.awt.BorderLayout());
+
+        jScrollPane1.setViewportView(listaArticulos);
+
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<ArticuloFinal> listaArticulos;
     // End of variables declaration//GEN-END:variables
 }

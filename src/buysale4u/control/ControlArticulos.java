@@ -52,10 +52,10 @@ public class ControlArticulos {
         String json = HttpRequest.GET_REQUEST(Constantes.URL_MIS_ARTICULOS+"?usuario="+Login.u.getEmail());
         //objeto Gson
         Gson gson = new Gson();
-            System.out.println(json);
+           
         //serializacion del json a array de Articulo
         Articulo[] articulos = gson.fromJson(json, Articulo[].class);
-
+            
         return articulos;
         }else{
         //cadena json con los datos de los articulos
@@ -91,18 +91,22 @@ public class ControlArticulos {
             String cadenabinario = HttpRequest.GET_REQUEST(Constantes.URL_LISTA_IMAGENES + "?id_articulo=" + array1.getId());
             //serializacion de json a array de Binario
             binario = gson.fromJson(cadenabinario, Binario[].class);
+            
             //inicializar coleccion de ImageIcon
             ArrayList<ImageIcon> imagenes = new ArrayList<>();
             //comprobamos si el array de Binario tiene datos
             if (binario.length > 0) {
                 //iteramos el array de Binario
                 for (Binario binario1 : binario) {
+                   
                     //decodificamos los datos de la cadena de texto del atributo "String binario" de cada objeto a Base64
                     byte[] bytes = Base64.getDecoder().decode(binario1.getBinario());
                     //creamos un nuevo objeto ImageIcon con los bytes en base64
                     ImageIcon ii = new ImageIcon(bytes);
                     //añadimos el objeto a la coleccion local
                     imagenes.add(ii);
+                    
+                   
                 }
 
             }
