@@ -9,6 +9,7 @@ import buysale4u.swing.articulos.NuevoArticulo;
 import buysale4u.swing.usuarios.DatosPersonales;
 import buysale4u.swing.galeria.MisArticulos;
 import java.awt.Dialog;
+import javax.swing.JFrame;
 
 /**
  * Ventana donde podemos mostar los articulos creados por nosotros, crear un
@@ -110,6 +111,20 @@ public class VentanaPersonal extends javax.swing.JFrame {
         panelCentral = new MisArticulos(this);
         // cambiamos el valor visible del anterior panel a true
         panelCentral.setVisible(true);
+         //creamos una nueva ventana
+        JFrame newframe = new JFrame();
+        //creamos un nuevo panel con el constructor de la clase NuevoMensaje
+        MisArticulos panel = new MisArticulos(newframe);
+        //cambiamos el tamaño del panel
+        panel.setSize(500, 500);
+        // hacemos visible el panel
+        panel.setVisible(true);
+        //añadimos el panel a la ventana
+        newframe.add(panel);
+        //cambiamos el tamaño de la ventana
+        newframe.setSize(500, 500);
+        //hacemos visible la ventana
+        newframe.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

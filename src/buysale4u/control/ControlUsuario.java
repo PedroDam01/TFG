@@ -18,21 +18,21 @@ public class ControlUsuario {
  * @param text String
  */
     public static void actualizar_contraseña(String text) {
-        HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_CONTRASEÑA+"?nuevo="+text+"&email="+Login.u.getEmail());
+        HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_CONTRASEÑA+"?pass="+text+"&email="+Login.u.getEmail());
     }
 /**
  * Metodo utilizado para cambiar los apellidos de los usuarios
  * @param text String
  */
     public static void actualizar_apellidos(String text) {
-           HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_APELLIDO+"?nuevo="+text+"&email="+Login.u.getEmail());
+           HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_APELLIDO+"?apellido="+text+"&email="+Login.u.getEmail());
     }
 /**
  * Metodo utilizado para cambiar el nombre de los usuarios
  * @param text String
  */
     public static void actualizar_nombre(String text) {
-            HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_NOMBRE+"?nuevo="+text+"&email="+Login.u.getEmail());
+            HttpRequest.GET_REQUEST(Constantes.URL_ACTUALIZAR_NOMBRE+"?nombre="+text+"&email="+Login.u.getEmail());
     }
     
 }

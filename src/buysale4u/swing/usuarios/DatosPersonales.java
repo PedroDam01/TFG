@@ -236,7 +236,13 @@ public class DatosPersonales extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(checkNombre, "Para cambiar el nombre debes introducir uno nuevo");
 
             } else {
-                ControlUsuario.actualizar_nombre(nombre.getText());
+                if (nombre.getText().equalsIgnoreCase(" ")) {
+                    JOptionPane.showMessageDialog(checkNombre, "Para cambiar el nombre debes introducir uno valido, no sirve dejarlo vacio");
+
+                } else {
+                    ControlUsuario.actualizar_nombre(nombre.getText());
+
+                }
             }
         }
         if (checkApellidos.isSelected()) {
@@ -244,7 +250,14 @@ public class DatosPersonales extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(checkNombre, "Para cambiar los apellidos debes introducir unos nuevos");
 
             } else {
-                ControlUsuario.actualizar_apellidos(nombre.getText());
+                if (apellidos.getText().equalsIgnoreCase(" ")) {
+                    JOptionPane.showMessageDialog(checkNombre, "Para cambiar el apellido debes introducir uno valido, no sirve dejarlo vacio");
+
+                } else {
+                    ControlUsuario.actualizar_apellidos(nombre.getText());
+
+                }
+
             }
         }
         if (checkContraseña.isSelected()) {
@@ -252,7 +265,14 @@ public class DatosPersonales extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(checkNombre, "Para cambiar la contraseña debes introducir una nueva");
 
             } else {
-                ControlUsuario.actualizar_contraseña(nombre.getText());
+                if (contraseña.getText().equalsIgnoreCase(" ")) {
+                    JOptionPane.showMessageDialog(checkNombre, "Para cambiar la contraseña debes introducir una valido, no sirve dejarla vacia");
+
+                } else {
+                    ControlUsuario.actualizar_contraseña(nombre.getText());
+
+                }
+
             }
         }
 

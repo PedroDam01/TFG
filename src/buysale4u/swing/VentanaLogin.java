@@ -205,6 +205,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         FormularioRegistro formulario = new FormularioRegistro();
         //cambiamos el valor visible de esta ventana a true
         formulario.setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

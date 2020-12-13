@@ -10,7 +10,7 @@ import buysale4u.swing.galeria.MostrarArticulo;
 import buysale4u.control.ControlArticulos;
 import entidades.Articulo;
 import entidades.ArticuloFinal;
-import java.awt.Dialog;
+import java.awt.Dialog; 
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;

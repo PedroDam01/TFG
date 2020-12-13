@@ -12,6 +12,7 @@ import entidades.ArticuloFinal;
 import java.awt.Dialog;
 import java.awt.Frame;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -58,7 +59,7 @@ public class MisArticulos extends javax.swing.JPanel {
                 //cambiamos el valor del articulo seleccionado con el elemento seleccionado de la lista
                 ControlArticulos.seleccionado = listaArticulos.getModel().getElementAt(indice);
                 //abrimos una nueva interfaz grafica con el constructor de la clase MostrarArticulo
-                galeria = new MostrarArticulo((Frame) getParent(), true,true);
+                galeria = new MostrarArticulo(parent, true,true);
                 galeria.setVisible(true);
 
             }

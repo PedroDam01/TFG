@@ -6,6 +6,7 @@
 package buysale4u.swing;
 
 import entidades.Usuario;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,7 @@ public class FormularioRegistro extends javax.swing.JFrame {
      */
     public FormularioRegistro() {
         initComponents();
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     /**
