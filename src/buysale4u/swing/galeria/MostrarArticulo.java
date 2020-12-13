@@ -10,6 +10,7 @@ import buysale4u.control.ControlArticulos;
 import buysale4u.control.ControlGaleria;
 import conexionWebService.Constantes;
 import conexionWebService.HttpRequest;
+import java.awt.Image;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -42,8 +43,10 @@ public class MostrarArticulo extends javax.swing.JDialog {
         listaFotos.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                
+                Image newimg =  listaFotos.getModel().getElementAt(listaFotos.getSelectedIndex()).getImage().getScaledInstance(500, 500, java.awt.Image.SCALE_SMOOTH);
                 //Cuando seleccionamos un elemento de la JList cambiamos el icono del JLabel para renderizar la imagen
-                imagen.setIcon((Icon) listaFotos.getModel().getElementAt(listaFotos.getSelectedIndex()));
+                imagen.setIcon(new ImageIcon(newimg));
             }
         });
         //cambiamos la propiedad que permite al usuario editar(introducir datos) en el JTextArea destinado a la descripcion del articulo
